@@ -427,6 +427,10 @@ section { position: relative; }
 .footer-social a:hover svg { stroke: var(--gold); }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 22px; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; flex-wrap: wrap; gap: 10px; }
 .footer-bottom a { color: var(--gold); }
+.footer-dev { margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.75rem; color: rgba(255,255,255,0.25); letter-spacing: 0.02em; }
+.footer-dev a { display: flex; align-items: center; text-decoration: none; }
+.footer-dev img { opacity: 0.4; transition: opacity var(--transition); max-width: 80px; height: auto; }
+.footer-dev:hover img { opacity: 0.7; }
 
 /* WhatsApp Float */
 .whatsapp-float { position: fixed; bottom: 24px; right: 24px; z-index: 999; width: 54px; height: 54px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(37, 211, 102, 0.4); transition: all var(--transition); }
