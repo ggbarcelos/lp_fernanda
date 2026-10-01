@@ -7,7 +7,7 @@ Landing page da campanha da Dra. Fernanda Beltrão. HTML, CSS e JavaScript está
 - WhatsApp: `5551986390931`, reutilizado da página principal. Todos os CTAs têm mensagem específica da campanha.
 - Identidade da clínica: verde `#4A6F70`, dourado `#D7B36A`, logo e fotografias existentes. Rosa da campanha: `#A7496D`.
 - Sem bibliotecas JavaScript adicionais. Google Fonts é o único recurso visual externo; há fontes de sistema como alternativa.
-- Abertura com fundo verde, títulos grandes e foto e vídeo em proporções próximas: `assets/material/fotos/principal.png` em destaque à direita e os vídeos da campanha à esquerda. No celular, os dois aparecem após o título. Transição direta para a campanha e profundidade suave ao rolar.
+- Abertura com fundo verde, títulos grandes e foto e vídeo em proporções próximas: `assets/material/fotos/principal.png` em destaque à direita e os vídeos da campanha à esquerda. A oferta completa aparece em um painel claro com texto de 18 px no desktop e 17 px no celular, introdução maior e destaque rosa para a camiseta e as condições especiais. No celular, a oferta e o convite para participar aparecem logo após o título e antes das fotos e dos vídeos. Transição direta para a campanha e profundidade suave ao rolar.
 - O álbum reúne nove fotos e nove vídeos intercalados, em três páginas de seis registros. As capas preservam o quadro completo com fundo desfocado, e as legendas ficam abaixo das imagens. A foto principal permanece na abertura e compõe os banners de compartilhamento social.
 
 ## Compartilhamento de links
@@ -64,6 +64,8 @@ A seção “Histórias que vestem a causa” fica entre o IMAMA e a apresentaç
 ## Origem e propósito
 
 A segunda dobra explica a motivação do Botox Rosa: apoiar simbolicamente o trabalho do IMAMA e unir autocuidado, solidariedade e conscientização no Outubro Rosa. A composição traz o texto à esquerda e as fotos locais `foto_vere.jpeg` e `foto_tiago.jpeg` em duas molduras à direita, com os três conceitos acima. As imagens aparecem inteiras, sem legendas nas molduras, com ampliação ao clicar. No celular, texto e composição seguem em uma coluna, mantendo as duas fotos lado a lado. A oferta permanece na hero, no FAQ e no convite final.
+
+O título da origem é “O presente é seu. A causa é de todos.”, evitando repetir o título da hero “Seu cuidado. Nossa causa. Outubro rosa.”. A oferta preserva integralmente o texto informado, com contraste mínimo medido de 6,48:1 no painel claro e sem rolagem horizontal nas larguras 320, 390, 430, 760, 768, 960, 1024 e 1440 px.
 
 A dobra de origem inclui a logo local do IMAMA, seu site e os perfis de Instagram, Facebook, YouTube e LinkedIn, conferidos nos links do próprio site `https://imama.org.br/` em 30/09/2026. Os links abrem em nova aba e a logo branca aparece sobre fundo verde para preservar o contraste.
 

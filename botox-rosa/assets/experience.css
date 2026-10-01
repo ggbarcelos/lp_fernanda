@@ -58,8 +58,10 @@
 .hero-campaign-badge .live-dot { flex: none; }
 .hero-cinema h1 { font-size: clamp(58px,6.05vw,88px); line-height: 1.08; margin-top: 27px; letter-spacing: -.052em; }
 .hero-cinema h1 em { color: #f3b9d0; white-space: nowrap; }
-.hero-cinema .hero-description { color: #dae2d7; font-size: 14px; max-width: 445px; margin-top: 26px; }
-.hero-cinema .hero-description strong { color: #f6dce7; }
+.hero-cinema .hero-description { color: #294746; font-size: 18px; font-weight: 450; line-height: 1.65; max-width: 530px; margin-top: 26px; padding: 22px 24px; border: 1px solid #f5c8d8; border-left: 4px solid #df92b0; border-radius: 6px 20px 20px 6px; background: #fff7f2; box-shadow: 0 12px 28px #102b2a18; }
+.hero-cinema .hero-description strong { color: #943b61; font-weight: 700; }
+.hero-offer-intro { font-size: 20px; line-height: 1.5; }
+.hero-offer-details { margin-top: 14px; padding-top: 14px; border-top: 1px solid #ccacb54d; }
 .hero-cinema .hero-actions { margin-top: 30px; gap: 24px; }
 .hero-cinema .hero-actions>.button { color: #294746; background: #f2c6d7; border-color: #f2c6d7; }
 .hero-cinema .hero-actions>.button:hover { background: #fff1f6; border-color: #fff1f6; }
@@ -137,7 +139,8 @@ body.dialog-open { overflow: hidden; }
   .site-header .header-cta { padding-inline: 12px; font-size: 10px; gap: 7px; }
   .hero-cinema { padding-top: 33px; }
   .hero-cinema h1 { font-size: 55px; }
-  .hero-cinema .hero-description { font-size: 12px; }
+  .hero-cinema .hero-description { font-size: 17px; padding: 19px 20px; }
+  .hero-offer-intro { font-size: 18px; }
   .hero-cinema .eyebrow { font-size: 8px; }
   .hero-cinema .hero-copy { padding-bottom: 15px; }
   .cinema-collage { height: 560px; }
@@ -175,7 +178,9 @@ body.dialog-open { overflow: hidden; }
   .hero-campaign-badge>.campaign-date { font-size: 10px; }
   .hero-cinema .hero-campaign-badge .eyebrow-divider { width: 12px; }
   .hero-cinema h1 { font-size: clamp(47px,11.8vw,76px); line-height: 1.09; margin-top: 25px; }
-  .hero-cinema .hero-description { font-size: 13px; max-width: 470px; margin: 23px 0 0; }
+  .hero-cinema .hero-description { font-size: 17px; line-height: 1.65; max-width: 100%; margin: 23px 0 0; padding: 19px 20px; border-radius: 6px 17px 17px 6px; }
+  .hero-offer-intro { font-size: 18px; }
+  .hero-offer-details { margin-top: 12px; padding-top: 12px; }
   .hero-cinema .hero-actions { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 17px 23px; margin-top: 25px; }
   .hero-cinema .hero-actions>.button { min-height: 53px; padding-inline: 22px; font-size: 12px; }
   .hero-cinema .hero-actions>.text-link { font-size: 10px; }
@@ -282,10 +287,10 @@ body.dialog-open { overflow: hidden; }
   .hero-cinema .hero-copy { display: contents; }
   .hero-cinema .hero-copy>.eyebrow { grid-row: 1; }
   .hero-cinema .hero-copy>h1 { grid-row: 2; margin-top: 0; }
-  .hero-cinema .hero-copy>.hero-description { grid-row: 4; margin-top: 0; }
-  .hero-cinema .hero-copy>.hero-actions { grid-row: 5; margin-top: 0; }
+  .hero-cinema .hero-copy>.hero-description { grid-row: 3; margin-top: 0; }
+  .hero-cinema .hero-copy>.hero-actions { grid-row: 4; margin-top: 0; }
   .hero-cinema .hero-copy>.hero-footnote { grid-row: 6; margin-top: 0; }
-  .cinema-photo-led { grid-row: 3; height: auto; width: min(440px,100%); aspect-ratio: .94; margin: 0 auto 6px; }
+  .cinema-photo-led { grid-row: 5; height: auto; width: min(440px,100%); aspect-ratio: .94; margin: 0 auto 6px; }
   .hero-portrait { right: 3px; border-width: 3px; border-radius: 48px 48px 14px 14px; }
   .cinema-photo-led .cinema-reel { border-width: 3px; border-radius: 14px; left: 3px; }
   .cinema-photo-led .cause-seal { width: 68px; height: 68px; left: 10%; top: 0; }
