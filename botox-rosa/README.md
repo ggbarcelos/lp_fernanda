@@ -10,6 +10,27 @@ Landing page da campanha da Dra. Fernanda Beltrão. HTML, CSS e JavaScript está
 - Abertura com fundo verde, títulos grandes e foto e vídeo em proporções próximas: `assets/material/fotos/principal.png` em destaque à direita e os vídeos da campanha à esquerda. A oferta completa aparece em uma composição inspirada em convite, com cabeçalho rosa, ícone de camiseta, divisão pontilhada e faixa verde para destacar a camiseta de presente. As condições especiais recebem um marcador rosa. O texto é de 18 px no desktop e 17 px no celular, com introdução maior. No celular, a oferta e o convite para participar aparecem logo após o título e antes das fotos e dos vídeos. Transição direta para a campanha e profundidade suave ao rolar.
 - O álbum reúne nove fotos e nove vídeos intercalados, em três páginas de seis registros. As capas preservam o quadro completo com fundo desfocado, e as legendas ficam abaixo das imagens. A foto principal permanece na abertura e compõe os banners de compartilhamento social.
 
+## Diário de outubro · 2026
+
+A seção `#campanha-2026` apresenta um registro por vez, com foto inteira, fundo desfocado e ampliação no diálogo existente. Com uma única foto, ela funciona como destaque editorial, sem espaços ou setas vazias. Com vários registros, surgem setas e contador; fotos e vídeos se alternam sem aumentar a altura da LP. É possível navegar também pelas setas do teclado. Vídeos abrem com áudio e controles por escolha do visitante; as prévias não reproduzem automaticamente. O álbum anterior está identificado como edição de 2025 em um `details` nativo: aberto por padrão no desktop e recolhido no celular (até 760 px). A mudança de tamanho da tela atualiza esse estado padrão. Links para `#momentos` abrem o álbum, inclusive no acesso direto à âncora, preservando a navegação anterior.
+
+Para adicionar registros, coloque os arquivos diretamente em:
+
+- `botox-rosa/assets/2026/fotos/`: JPG, JPEG, PNG, WebP, AVIF ou GIF.
+- `botox-rosa/assets/2026/videos/`: MP4 (preferencialmente H.264/AAC), WebM ou M4V.
+
+O build lê as pastas em toda publicação, atualiza contadores e cria URLs versionadas. Basta enviar os novos arquivos para o branch `main`, pelo fluxo de publicação existente; não é preciso cadastrar cada mídia no HTML ou JavaScript. Arquivos removidos também saem da seção na próxima publicação. GitHub Pages é estático: copiar arquivos só para uma pasta local não altera a página pública até que sejam publicados.
+
+Os nomes determinam a ordem natural (`01`, `02`, `10`); fotos e vídeos são intercalados. Arquivos ocultos, atalhos e formatos não suportados ficam fora do álbum. Não há limite de registros, e a altura da seção continua fixa.
+
+Para visualizar localmente com descoberta automática de novos arquivos a cada recarregamento:
+
+```sh
+python3 scripts/preview_site.py --port 8000
+```
+
+Abra `http://127.0.0.1:8000/botox-rosa/#campanha-2026`. A prévia estática do HTML fonte contém a primeira foto; a prévia acima e o build publicado usam a coleção atual das pastas.
+
 ## Compartilhamento de links
 
 Os arquivos `index.html` da raiz e `botox-rosa/index.html` incluem metadados estáticos Open Graph e Twitter Cards, disponíveis também para leitores que não executam JavaScript. Ambos usam o domínio `fernandabeltrao.com.br` e o mesmo título da campanha. A raiz continua redirecionando para a LP.
@@ -44,7 +65,7 @@ A clínica confirmou para outubro de 2026: botox ou procedimento de harmonizaç�
 
 A forma de contribuição financeira ao instituto ainda não foi informada. Não foram inventados percentuais, valores por procedimento, números de pacientes ou percentuais de desconto de 2026. Se a clínica confirmar compra de camisetas ou doação, atualizar o FAQ com a mecânica real.
 
-A linguagem foi alinhada aos textos de 2025: beleza com propósito, autocuidado, solidariedade e gratidão. Análise e referências em [analise-textos-instagram.md](analise-textos-instagram.md).
+A linguagem foi alinhada aos textos de 2025: beleza com propósito, autocuidado e gratidão. Análise e referências em [analise-textos-instagram.md](analise-textos-instagram.md).
 
 ## Fontes consultadas em 30/09/2026
 
@@ -87,7 +108,7 @@ A seção “Histórias que vestem a causa” fica entre o IMAMA e a apresentaç
 
 ## Origem e propósito
 
-A segunda dobra explica a motivação do Botox Rosa: apoiar simbolicamente o trabalho do IMAMA e unir autocuidado, solidariedade e conscientização no Outubro Rosa. A composição traz o texto à esquerda e as fotos locais `foto_vere.jpeg` e `foto_tiago.jpeg` em duas molduras à direita, com os três conceitos acima. As imagens aparecem inteiras, sem legendas nas molduras, com ampliação ao clicar. No celular, texto e composição seguem em uma coluna, mantendo as duas fotos lado a lado. A oferta permanece na hero, no FAQ e no convite final.
+A segunda dobra explica a motivação do Botox Rosa: apoiar simbolicamente o trabalho do IMAMA e unir autocuidado e conscientização no Outubro Rosa. A composição traz o texto à esquerda e as fotos locais `foto_vere.jpeg` e `foto_tiago.jpeg` em duas molduras à direita, com os três conceitos acima. As imagens aparecem inteiras, sem legendas nas molduras, com ampliação ao clicar. No celular, texto e composição seguem em uma coluna, mantendo as duas fotos lado a lado. A oferta permanece na hero, no FAQ e no convite final.
 
 O título da origem é “O presente é seu. A causa é de todos.”, evitando repetir o título da hero “Seu cuidado. Nossa causa. Outubro rosa.”. A oferta preserva integralmente o texto informado, com contraste mínimo medido de 5,35:1 entre os diferentes fundos e textos da composição e sem rolagem horizontal nas larguras 320, 390, 430, 760, 768, 960, 1024 e 1440 px.
 

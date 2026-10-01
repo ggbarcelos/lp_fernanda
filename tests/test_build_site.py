@@ -91,3 +91,55 @@ class VersionedBuildTest(unittest.TestCase):
         text = (self.output / "botox-rosa/index.html").read_text()
         self.assertRegex(text, r'srcset="assets/photo%20image\.[a-f0-9]{16}\.jpg 360w, assets/photo%20image\.[a-f0-9]{16}\.jpg 720w"')
         self.assertIn('sizes="50vw"', text)
+
+    def add_campaign_file(self, name, contents="media"):
+        path = self.root / "botox-rosa/assets/2026" / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(contents)
+        return path
+
+    def add_campaign_section(self):
+        source = self.root / "botox-rosa/index.html"
+        source.write_text(source.read_text() + '<span data-diary-count>old</span><span data-diary-status aria-live="polite">old</span><!-- campaign-2026:start -->stale<!-- campaign-2026:end -->')
+
+    def test_campaign_discovers_added_and_removed_media_with_versioned_urls(self):
+        self.add_campaign_section()
+        photo = self.add_campaign_file("fotos/Encontro 01.PNG")
+        self.add_campaign_file("fotos/Encontro 10.webp")
+        self.add_campaign_file("fotos/Encontro 2.jpg")
+        self.add_campaign_file("videos/Depoimento & carinho.mp4")
+        self.add_campaign_file("fotos/.DS_Store")
+        self.add_campaign_file("fotos/notes.txt")
+        self.add_campaign_file("videos/.oculto.mp4")
+        self.add_campaign_file("fotos/atalho.jpg").unlink()
+        (photo.parent / "atalho.jpg").symlink_to(photo)
+        assets = builder.build(self.root, self.output, "a" * 40)
+        text = (self.output / "botox-rosa/index.html").read_text()
+        self.assertIn("3 fotos + 1 vídeo", text)
+        self.assertIn("01 / 04", text)
+        self.assertEqual(text.count('class="diary-card"'), 4)
+        self.assertIn('data-preview-src="assets/2026/videos/Depoimento%20%26%20carinho.', text)
+        self.assertIn(assets["botox-rosa/assets/2026/fotos/Encontro 01.PNG"].removeprefix("botox-rosa/").replace(" ", "%20"), text)
+        self.assertLess(text.index("Encontro%202."), text.index("Encontro%2010."))
+        self.assertNotIn("atalho", text)
+        self.assertFalse((self.output / "botox-rosa/assets/2026/fotos/.DS_Store").exists())
+        photo.unlink()
+        self.add_campaign_file("videos/mais um.webm")
+        builder.build(self.root, self.output, "b" * 40)
+        text = (self.output / "botox-rosa/index.html").read_text()
+        self.assertIn("2 fotos + 2 vídeos", text)
+        self.assertNotIn("Encontro%2001.", text)
+        self.assertIn("mais%20um.", text)
+
+    def test_campaign_has_useful_empty_state_and_escapes_filenames(self):
+        self.add_campaign_section()
+        builder.build(self.root, self.output, "a" * 40)
+        text = (self.output / "botox-rosa/index.html").read_text()
+        self.assertIn('class="diary-empty"', text)
+        self.assertNotIn('class="diary-card"', text)
+        self.add_campaign_file('fotos/encontro "><script>.jpg')
+        builder.build(self.root, self.output, "b" * 40)
+        text = (self.output / "botox-rosa/index.html").read_text()
+        self.assertIn('1 foto', text)
+        self.assertIn('%22%3E%3Cscript%3E', text)
+        self.assertNotIn('encontro "><script>', text)

@@ -215,9 +215,57 @@
     lastMediaTrigger?.focus({ preventScroll: true });
   });
 
+  const diary = document.querySelector('.diary-album');
+  if (diary) {
+    const cards = [...diary.querySelectorAll('.diary-card')];
+    const steps = [...diary.querySelectorAll('[data-diary-step]')];
+    let current = 0;
+    function showDiaryRecord(index) {
+      if (!cards.length) return;
+      current = (index + cards.length) % cards.length;
+      cards.forEach((card, position) => {
+        card.hidden = position !== current;
+        // Defer all video requests until the visitor selects this record.
+        const preview = card.querySelector('video');
+        if (preview && !card.hidden && !preview.hasAttribute('src') && !navigator.connection?.saveData) {
+          preview.preload = 'metadata';
+          preview.src = preview.dataset.previewSrc;
+        }
+      });
+      diary.querySelector('[data-diary-status]').textContent = `${String(current + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+    }
+    steps.forEach(button => {
+      button.hidden = cards.length < 2;
+      button.addEventListener('click', () => showDiaryRecord(current + Number(button.dataset.diaryStep)));
+    });
+    diary.addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight'].includes(event.key) || cards.length < 2) return;
+      const focusedCard = event.target.closest('.diary-card');
+      event.preventDefault();
+      showDiaryRecord(current + (event.key === 'ArrowRight' ? 1 : -1));
+      if (focusedCard) cards[current].focus({ preventScroll: true });
+    });
+    showDiaryRecord(0);
+  }
+
+  const pastAlbum = document.querySelector('.past-album');
+  function syncPastAlbumLayout() {
+    if (pastAlbum) pastAlbum.open = !mobileQuery.matches || window.location.hash === '#momentos';
+  }
+  mobileQuery.addEventListener('change', syncPastAlbumLayout);
+  syncPastAlbumLayout();
+  function openPastAlbum() {
+    if (pastAlbum && window.location.hash === '#momentos') pastAlbum.open = true;
+  }
+  document.querySelectorAll('a[href="#momentos"]').forEach(link => {
+    link.addEventListener('click', () => { if (pastAlbum) pastAlbum.open = true; });
+  });
+  window.addEventListener('hashchange', openPastAlbum);
+  openPastAlbum();
+
   const albumCards = [...document.querySelectorAll('.moments-track>.moment-card')];
   // Reuse the image selected by srcset; below-fold backgrounds must not prefetch the album.
-  document.querySelectorAll('.moment-visual img').forEach(image => {
+  document.querySelectorAll('.moment-visual img, .diary-visual img').forEach(image => {
     function syncBackground() {
       if (image.naturalWidth) image.parentElement.style.backgroundImage = `url("${image.currentSrc || image.src}")`;
     }

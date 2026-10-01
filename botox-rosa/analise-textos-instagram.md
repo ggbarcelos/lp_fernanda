@@ -4,7 +4,7 @@ Análise das cinco publicações indicadas e dos textos de 2025 fornecidos pela 
 
 ## Padrão de linguagem aplicado
 
-A campanha fala de beleza com propósito: um momento de autocuidado que se conecta à solidariedade. A camiseta oficial do IMAMA é apresentada como presente e símbolo de apoio. O convite é próximo e acolhedor, com verbos como cuidar, vestir, apoiar, participar e compartilhar.
+A campanha fala de beleza com propósito: um momento dedicado ao autocuidado. A camiseta oficial do IMAMA é apresentada como presente e símbolo de apoio. O convite é próximo e acolhedor, com verbos como cuidar, vestir, apoiar, participar e compartilhar.
 
 O nome da clínica nos textos é **FB Harmonização & Odontologia**. A marca visual da Dra. Fernanda Beltrão continua identificando a página. A grafia foi padronizada para **Botox Rosa**, **Odontologia** e **símbolo**.
 
@@ -16,17 +16,17 @@ O nome da clínica nos textos é **FB Harmonização & Odontologia**. A marca vi
 | [Última semana](https://www.instagram.com/reels/DQMWIjJEf4s/) | Beleza com propósito, condições especiais, camiseta oficial de presente e urgência no encerramento. | Oferta da camiseta com clareza; condições de 2026 consultadas com a equipe. |
 | [Apresentação do Botox Rosa](https://www.instagram.com/dra.fernandabeltrao/reel/DPrlpIhEcZt/) — 11/10/2025 | Botox durante outubro, camiseta oficial do IMAMA como presente e símbolo de apoio ao instituto. | Mensagem da hero, explicação da campanha, terceiro passo e FAQ. |
 | [22ª Caminhada das Vitoriosas](https://www.instagram.com/dra.fernandabeltrao/p/DP_sBXEDGtL/) — 19/10/2025 | Registro de uma ação coletiva ligada à causa, em Porto Alegre. | Histórico de engajamento com link para o registro original. |
-| [Encerramento](https://www.instagram.com/dra.fernandabeltrao/reel/DQfTesqkt8p/) — 31/10/2025 | Gratidão às pessoas que participaram, autoestima, solidariedade e continuidade no próximo outubro. | Introdução da galeria, narrativa da edição anterior e convite para 2026. |
+| [Encerramento](https://www.instagram.com/dra.fernandabeltrao/reel/DQfTesqkt8p/) — 31/10/2025 | Gratidão às pessoas que participaram, autoestima, apoio à causa e continuidade no próximo outubro. | Introdução da galeria, narrativa da edição anterior e convite para 2026. |
 
 ## Texto principal aplicado
 
 **Hero:** Outubro é o mês da beleza com propósito na FB Harmonização & Odontologia. Ao fazer seu botox ou um procedimento de harmonização facial, você ganha a camiseta oficial do IMAMA 2026 e aproveita condições especiais durante todo o mês de outubro.
 
-**Campanha:** O Botox Rosa está de volta! Durante todo o mês de outubro, faça seu botox ou um procedimento de harmonização facial na clínica, ganhe de presente a camiseta oficial do IMAMA 2026 e aproveite condições especiais. Um símbolo do nosso apoio ao instituto e um convite para unir autocuidado e solidariedade.
+**Campanha:** O Botox Rosa está de volta! Durante todo o mês de outubro, faça seu botox ou um procedimento de harmonização facial na clínica, ganhe de presente a camiseta oficial do IMAMA 2026 e aproveite condições especiais. Um símbolo do nosso apoio ao instituto e um convite ao autocuidado.
 
 **Galeria:** Em 2025, encerramos outubro com o coração cheio. Estes registros guardam os encontros, os sorrisos e o carinho de quem se cuidou e vestiu a causa com a gente.
 
-**Convite final:** Cuide de você e abrace essa causa. Em outubro, seu botox ou procedimento de harmonização facial vem com a camiseta oficial do IMAMA 2026 e condições especiais: um presente que une autocuidado e solidariedade.
+**Convite final:** Cuide de você e abrace essa causa. Em outubro, seu botox ou procedimento de harmonização facial vem com a camiseta oficial do IMAMA 2026 e condições especiais: um presente que celebra o autocuidado.
 
 ## Contexto preservado
 

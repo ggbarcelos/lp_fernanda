@@ -14,10 +14,70 @@ ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = "https://fernandabeltrao.com.br"
 PUBLIC_DIRS = ("assets", "botox-rosa/assets", "img")
 PAGES = ("index.html", "botox-rosa/index.html")
-ATTR = re.compile(r'(?P<prefix>\b(?:src|href|poster|data-media|data-src|data-poster|content)=")(?P<url>[^"<>]*)(?P<suffix>")')
+ATTR = re.compile(r'(?P<prefix>\b(?:src|href|poster|data-media|data-src|data-preview-src|data-poster|content)=")(?P<url>[^"<>]*)(?P<suffix>")')
 SRCSET = re.compile(r'(?P<prefix>\bsrcset=")(?P<value>[^"<>]*)(?P<suffix>")')
 CSS_URL = re.compile(r"url\(\s*(['\"]?)([^)'\"]+)\1\s*\)")
 JSON_LD = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.S)
+CAMPAIGN_CARDS = re.compile(r'(<!-- campaign-2026:start -->).*?(<!-- campaign-2026:end -->)', re.S)
+PHOTO_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif"}
+VIDEO_EXTENSIONS = {".mp4", ".webm", ".m4v"}
+
+
+def campaign_2026_media(root):
+    """Discover published media; ignore hidden files, symlinks and unsupported formats."""
+    groups = []
+    for folder, extensions, kind in (("fotos", PHOTO_EXTENSIONS, "image"), ("videos", VIDEO_EXTENSIONS, "video")):
+        directory = root / "botox-rosa/assets/2026" / folder
+        files = sorted((file for file in directory.glob("*")
+                        if file.is_file() and not file.is_symlink() and not file.name.startswith(".")
+                        and file.suffix.lower() in extensions),
+                       key=lambda file: tuple((0, int(part)) if part.isdigit() else (1, part.casefold())
+                                              for part in re.split(r'(\d+)', file.name)))
+        groups.append([(file, kind) for file in files])
+    # Interleave photos and videos while preserving natural filename order.
+    media = []
+    for index in range(max(map(len, groups), default=0)):
+        for group in groups:
+            if index < len(group):
+                file, kind = group[index]
+                media.append({"src": quote(file.relative_to(root / "botox-rosa").as_posix(), safe="/"), "type": kind})
+    return media
+
+
+def render_campaign_2026(text, root):
+    if not CAMPAIGN_CARDS.search(text):
+        return text
+    media = campaign_2026_media(root)
+    cards = []
+    for index, item in enumerate(media):
+        number = f"{index + 1:02}"
+        title = f"Botox Rosa 2026 · Registro {number}"
+        source = html.escape(item["src"], quote=True)
+        action = "Ampliar foto" if item["type"] == "image" else "Assistir ao vídeo"
+        icon = "expand" if item["type"] == "image" else "play"
+        if item["type"] == "image":
+            visual = f'<img src="{source}" alt="Registro da campanha Botox Rosa 2026 na clínica" loading="lazy" decoding="async">'
+        else:
+            # Only the selected video fetches metadata, never the entire collection.
+            visual = f'<video data-preview-src="{source}" preload="none" muted playsinline aria-hidden="true"></video><span class="diary-video-mark"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg><span>UMA HISTÓRIA EM VÍDEO</span></span>'
+        cards.append(f'''<button type="button" class="diary-card" data-media="{source}" data-type="{item['type']}" data-title="{title}" data-description="Um encontro de autocuidado na edição de 2026." data-track-video="campanha_2026_{number}" data-track-placement="campanha_2026" aria-label="{action}: {title}"{(' hidden' if index else '')}>
+              <span class="diary-visual">{visual}</span>
+              <span class="diary-card-action">{action} <svg class="icon" aria-hidden="true"><use href="#icon-{icon}"/></svg></span>
+            </button>''')
+    if not cards:
+        cards.append('<div class="diary-empty"><img src="assets/ribbon.svg" width="42" height="68" alt=""><p>Um outubro para vestir a causa.</p><span>Os encontros de 2026 chegam por aqui.</span></div>')
+    text = CAMPAIGN_CARDS.sub(lambda m: m[1] + "\n            " + "\n            ".join(cards) + "\n            " + m[2], text)
+    photos = sum(item["type"] == "image" for item in media)
+    videos = len(media) - photos
+    counts = []
+    if photos:
+        counts.append(f"{photos} foto" + ("s" if photos > 1 else ""))
+    if videos:
+        counts.append(f"{videos} vídeo" + ("s" if videos > 1 else ""))
+    count = " + ".join(counts) or "Novos encontros em breve"
+    text = re.sub(r'(<span data-diary-count>).*?(</span>)', lambda m: m[1] + count + m[2], text)
+    text = re.sub(r'(<span data-diary-status[^>]*>).*?(</span>)', lambda m: m[1] + (f"01 / {len(media):02}" if media else "2026") + m[2], text)
+    return text
 
 
 def fingerprint(path, contents):
@@ -79,7 +139,7 @@ def build(root, output, revision):
     output.mkdir(parents=True)
     (output / ".site-build-output").touch()
     assets = {}
-    sources = sorted(file for folder in PUBLIC_DIRS for file in (root / folder).rglob("*") if file.is_file() and not file.is_symlink())
+    sources = sorted(file for folder in PUBLIC_DIRS for file in (root / folder).rglob("*") if file.is_file() and not file.is_symlink() and not any(part.startswith(".") for part in file.relative_to(root).parts))
     # CSS fingerprints include the final URLs of their image dependencies.
     for file in sorted(sources, key=lambda file: file.suffix == ".css"):
         path = file.relative_to(root)
@@ -96,6 +156,8 @@ def build(root, output, revision):
     for filename in PAGES:
         path = Path(filename)
         text = (root / path).read_text(encoding="utf-8")
+        if filename == "botox-rosa/index.html":
+            text = render_campaign_2026(text, root)
         text = ATTR.sub(lambda m: m["prefix"] + html.escape(html.unescape(asset_url(m["url"], path, assets)), quote=True) + m["suffix"], text)
         text = SRCSET.sub(lambda m: m["prefix"] + rewrite_srcset(m["value"], path, assets) + m["suffix"], text)
         text = rewrite_css(text, path, assets)
