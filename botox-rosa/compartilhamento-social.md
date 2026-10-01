@@ -17,11 +17,13 @@ As descrições Open Graph e Twitter Cards usam exatamente o texto informado: �
 
 ## Publicação e cache
 
-1. Publicar os dois HTMLs e os dois JPEGs no branch `main`, pasta `/`, usado pelo GitHub Pages.
-2. Concluir o DNS do domínio no Registro.br e habilitar HTTPS no Pages quando disponível.
+Desde 01/10/2026, o workflow de publicação versiona os banners automaticamente pelo conteúdo e atualiza as URLs nos dois HTMLs. A tabela acima identifica os arquivos de origem; os arquivos publicados recebem um hash antes da extensão. Alterar o banner e enviar ao `main` já gera uma nova URL na publicação, sem atualizar manualmente a versão do nome. O cache de uma prévia que já foi armazenada pelo aplicativo social continua sob controle desse aplicativo.
+
+1. Enviar os HTMLs e os JPEGs alterados ao branch `main`; o workflow prepara e publica os arquivos no GitHub Pages.
+2. Aguardar a conclusão do workflow. DNS e HTTPS do domínio já estão funcionando.
 3. Conferir se a página e os JPEGs retornam HTTP 200 no domínio público.
 4. Para atualizar uma prévia antiga, usar o [Sharing Debugger do Facebook](https://developers.facebook.com/tools/debug/) e o [Post Inspector do LinkedIn](https://www.linkedin.com/post-inspector/). A prévia no WhatsApp pode depender do cache do aplicativo; mensagens já enviadas não são uma validação da versão nova.
-5. Em alterações futuras do banner, exportar arquivos com uma nova versão no nome e atualizar os dois HTMLs, evitando reaproveitar a URL antiga.
+5. Em alterações futuras do banner, editar os arquivos de origem e publicar. O build atualiza automaticamente os endereços dos banners alterados.
 
 O banner é uma prévia de **link**. Publicações de imagem em feed, Stories ou Status são outros formatos e não são configuradas pelos metadados da página. Cada aplicativo decide como apresentar o link; o arquivo fornecido não garante que todas as telas mostrem uma imagem grande.
 

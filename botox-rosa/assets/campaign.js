@@ -5,6 +5,9 @@
   const mobileNav = document.querySelector('.mobile-nav');
   const mobileQuery = window.matchMedia('(max-width: 760px)');
   const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const assetManifest = document.getElementById('site-assets');
+  const assetUrls = assetManifest ? JSON.parse(assetManifest.textContent) : {};
+  const campaignAsset = path => assetUrls[path] || path;
 
   function setMenu(open, returnFocus = false) {
     toggle.setAttribute('aria-expanded', String(open));
@@ -95,8 +98,8 @@
       heroClipIndex = clipIndex;
       const [file, poster, title] = heroClips[clipIndex];
       const source = `assets/material/videos/${file}`;
-      heroWatch.dataset.media = source;
-      heroWatch.dataset.poster = `assets/media/${poster}`;
+      heroWatch.dataset.media = campaignAsset(source);
+      heroWatch.dataset.poster = campaignAsset(`assets/media/${poster}`);
       heroWatch.dataset.title = title;
       heroWatch.dataset.description = 'Um registro da campanha Botox Rosa na FB Harmonização & Odontologia.';
       heroWatch.setAttribute('aria-label', `Assistir com áudio: ${title}`);

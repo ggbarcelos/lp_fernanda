@@ -20,7 +20,7 @@ Os arquivos `index.html` da raiz e `botox-rosa/index.html` incluem metadados est
 - Os banners usam a foto `assets/material/fotos/principal.png`, com o rosto inteiro e a identidade visual da campanha.
 - Especificações, prompt de criação e orientações sobre publicação/cache em [compartilhamento-social.md](compartilhamento-social.md).
 
-Em 01/10/2026, o domínio público retornou HTTP 200 por HTTPS. O GitHub Pages está configurado para `main` e `/`, com `fernandabeltrao.com.br` cadastrado e HTTPS obrigatório.
+Em 01/10/2026, o domínio público retornou HTTP 200 por HTTPS, com `fernandabeltrao.com.br` cadastrado e HTTPS obrigatório. A publicação passa a usar o workflow `.github/workflows/pages.yml`, acionado por atualizações no branch `main`.
 - As fotos abrem em um diálogo de ampliação; os vídeos abrem com áudio e controles nativos. O diálogo fecha pelo botão, por Escape ou pelo fundo e devolve o foco ao elemento de origem.
 - A hero reproduz `assets/media/hero-mix.mp4`: um mix em loop de 35 segundos, com trechos de 5 segundos dos sete vídeos de `assets/material/videos`. Ordem: `botox_rosa`, `fernanda1`, `editado1`, `tiago1`, `vere2`, `vide_vere`, `video_vere3`. Cada trecho usa os segundos 2 a 7 do original; saída vertical 540 × 960, 30 fps, H.264 sem áudio. O botão “Assistir com áudio” acompanha a cena atual e abre seu vídeo original completo. A reprodução pausa fora da área visível, ao abrir o diálogo, ao esconder a aba ou quando o navegador indica preferência por movimento reduzido.
 - Os vídeos completos carregam apenas quando escolhidos. Versões locais em H.264/AAC, com início rápido, em `assets/media`. Os vídeos originais estão em `assets/material/videos` e as fotos em `assets/material/fotos`; as versões dos vídeos para a LP ficam em `assets/media`.
@@ -55,9 +55,17 @@ A linguagem foi alinhada aos textos de 2025: beleza com propósito, autocuidado,
 
 ## Verificação local
 
-Layout conferido em 320, 390, 768, 1024 e 1440 px, sem rolagem horizontal. CTAs, âncoras, carregamento das imagens, menu móvel (incluindo Escape), FAQ e movimento reduzido verificados no Chromium. Não há compilação ou instalação de dependências para publicar esta página.
+Layout conferido em 320, 390, 768, 1024 e 1440 px, sem rolagem horizontal. CTAs, âncoras, carregamento das imagens, menu móvel (incluindo Escape), FAQ e movimento reduzido verificados no Chromium. A publicação prepara os arquivos estáticos com Python, sem instalar bibliotecas; os testes usam Python e Node.js disponíveis no runner do GitHub Actions.
 
 A revisão com mídia também foi verificada nessas cinco larguras: reprodução da montagem sem áudio, vídeos sob demanda com controles, abertura e fechamento do diálogo, ampliação de fotos, pausa do movimento e ausência de erros de JavaScript.
+
+## Atualizações e cache
+
+Cada push no branch `main` executa os testes, gera `_site` e publica o site pelo GitHub Actions. CSS, JavaScript, fotos, vídeos, logos e banners recebem nomes derivados do conteúdo. Arquivos alterados ganham um endereço novo automaticamente; arquivos iguais continuam aproveitando o cache. As referências em HTML, CSS, dados estruturados e vídeos selecionados por JavaScript são atualizadas durante o build.
+
+A LP verifica `site-version.json` ao abrir, ao ser restaurada pelo histórico e ao voltar para a aba. Se o HTML estiver antigo, navega para a versão publicada sem exigir limpeza manual de cache, preservando parâmetros e âncoras. A verificação ignora o cache do navegador, tem timeout e não cria ciclos de recarregamento. Um diálogo de foto ou vídeo aberto termina antes da atualização. A prévia local permanece editável sem build.
+
+Detalhes, limites da hospedagem e comandos em [atualizacoes-cache.md](atualizacoes-cache.md).
 
 ## Refatoração das seções após a hero
 

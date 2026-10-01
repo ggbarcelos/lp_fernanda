@@ -1,0 +1,117 @@
+"""Build GitHub Pages files with content fingerprints, using only Python's stdlib."""
+
+import argparse
+import hashlib
+import html
+import json
+import posixpath
+import re
+import shutil
+from pathlib import Path
+from urllib.parse import quote, unquote, urlsplit, urlunsplit
+
+ROOT = Path(__file__).resolve().parents[1]
+ORIGIN = "https://fernandabeltrao.com.br"
+PUBLIC_DIRS = ("assets", "botox-rosa/assets", "img")
+PAGES = ("index.html", "botox-rosa/index.html")
+ATTR = re.compile(r'(?P<prefix>\b(?:src|href|poster|data-media|data-src|data-poster|content)=")(?P<url>[^"<>]*)(?P<suffix>")')
+CSS_URL = re.compile(r"url\(\s*(['\"]?)([^)'\"]+)\1\s*\)")
+JSON_LD = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.S)
+
+
+def fingerprint(path, contents):
+    digest = hashlib.sha256(contents).hexdigest()[:16]
+    return str(path.with_name(f"{path.stem}.{digest}{path.suffix}"))
+
+
+def asset_url(value, context, assets):
+    url = urlsplit(html.unescape(value))
+    if not url.path or (url.scheme or url.netloc) and f"{url.scheme}://{url.netloc}" != ORIGIN:
+        return value
+    path = unquote(url.path)
+    absolute = bool(url.netloc) or path.startswith("/")
+    source = path.lstrip("/") if absolute else posixpath.normpath(posixpath.join(str(context.parent), path))
+    if source not in assets:
+        return value
+    target = assets[source] if absolute else posixpath.relpath(assets[source], str(context.parent))
+    target = quote(target, safe="/")
+    if absolute:
+        target = "/" + target
+    # Former manual ?v= values are superseded by the content fingerprint.
+    return urlunsplit((url.scheme, url.netloc, target, "", url.fragment))
+
+
+def rewrite_css(text, context, assets):
+    return CSS_URL.sub(lambda m: f"url('{asset_url(m[2], context, assets)}')", text)
+
+
+def rewrite_json(value, context, assets):
+    if isinstance(value, str):
+        return asset_url(value, context, assets)
+    if isinstance(value, list):
+        return [rewrite_json(item, context, assets) for item in value]
+    if isinstance(value, dict):
+        return {key: rewrite_json(item, context, assets) for key, item in value.items()}
+    return value
+
+
+def build(root, output, revision):
+    root, output = root.resolve(), output.resolve()
+    if not re.fullmatch(r"[a-f0-9]{40}", revision):
+        raise ValueError("Revision must be a full Git commit SHA.")
+    if output == root or output in root.parents or any(output == root / folder or root / folder in output.parents for folder in PUBLIC_DIRS):
+        raise ValueError("Output must not replace source files.")
+    if output.exists():
+        if not (output / ".site-build-output").is_file():
+            raise ValueError("Refusing to replace an unmanaged output directory.")
+        shutil.rmtree(output)
+    output.mkdir(parents=True)
+    (output / ".site-build-output").touch()
+    assets = {}
+    sources = sorted(file for folder in PUBLIC_DIRS for file in (root / folder).rglob("*") if file.is_file() and not file.is_symlink())
+    # CSS fingerprints include the final URLs of their image dependencies.
+    for file in sorted(sources, key=lambda file: file.suffix == ".css"):
+        path = file.relative_to(root)
+        contents = file.read_bytes()
+        if file.suffix == ".css":
+            contents = rewrite_css(contents.decode("utf-8"), path, assets).encode("utf-8")
+        target = fingerprint(path, contents)
+        assets[str(path)] = target
+        for name in (str(path), target):
+            destination = output / name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(contents)
+
+    for filename in PAGES:
+        path = Path(filename)
+        text = (root / path).read_text(encoding="utf-8")
+        text = ATTR.sub(lambda m: m["prefix"] + html.escape(html.unescape(asset_url(m["url"], path, assets)), quote=True) + m["suffix"], text)
+        text = rewrite_css(text, path, assets)
+        text = JSON_LD.sub(lambda m: m[1] + "\n" + json.dumps(rewrite_json(json.loads(m[2]), path, assets), ensure_ascii=False, indent=2) + "\n" + m[3], text)
+        text = text.replace('name="site-version" content="development"', f'name="site-version" content="{revision}"')
+        if filename == "botox-rosa/index.html":
+            dynamic_assets = {posixpath.relpath(key, str(path.parent)): posixpath.relpath(value, str(path.parent)) for key, value in assets.items() if key.startswith("botox-rosa/assets/") and Path(key).suffix in (".mp4", ".jpg")}
+            manifest = json.dumps(dynamic_assets, ensure_ascii=False).replace("<", "\\u003c")
+            updater = (root / "assets/js/site-update.js").read_text(encoding="utf-8")
+            # Inline the tiny checker so cached HTML can still detect future releases.
+            text = re.sub(r'<script src="[^"<>]*site-update\.[a-f0-9]{16}\.js" defer></script>', lambda _: f'<script id="site-update">\n{updater}\n</script>\n  <script id="site-assets" type="application/json">{manifest}</script>', text)
+            if 'id="site-update"' not in text:
+                raise ValueError("Missing site update bootstrap in landing page.")
+        destination = output / path
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(text, encoding="utf-8")
+
+    for filename in ("CNAME", "robots.txt", "sitemap.xml"):
+        shutil.copyfile(root / filename, output / filename)
+    (output / "site-version.json").write_text(json.dumps({"revision": revision}) + "\n", encoding="utf-8")
+    (output / ".nojekyll").touch()
+    return assets
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--revision", required=True)
+    parser.add_argument("--output", type=Path, default=ROOT / "_site")
+    args = parser.parse_args()
+    result = build(ROOT, args.output, args.revision)
+    print(f"Built {len(result)} fingerprinted assets in {args.output}; revision {args.revision}.")
