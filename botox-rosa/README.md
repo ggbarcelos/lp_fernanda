@@ -34,6 +34,8 @@ O HTML contém dados estruturados de site, página, campanha, clínica (`Dentist
 
 O script assíncrono do Microsoft Clarity, projeto `yqwnjvqus9`, está no cabeçalho da LP. A página de redirecionamento da raiz não repete a integração.
 
+`assets/clarity-tracking.js` adiciona um identificador aleatório por navegador, tags da campanha e UTMs, visualizações das seções, reproduções/conclusões de vídeos e cliques no WhatsApp por posição do botão. Eventos e instruções de uso em [clarity.md](clarity.md).
+
 ## Conteúdo da campanha
 
 A oferta de camiseta para pacientes que realizarem botox durante outubro foi informada pela solicitante. O texto menciona apoio à causa do IMAMA sem afirmar uma parceria institucional formal ou repasse financeiro específico.

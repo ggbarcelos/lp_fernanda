@@ -89,13 +89,13 @@
     heroImage.addEventListener('error', finishHeroImage, { once: true });
   }
   const heroClips = [
-    ['botox_rosa.mp4', 'fernanda-poster.jpg', 'Um convite da Dra. Fernanda'],
-    ['fernanda1.mp4', 'fernanda1-poster.jpg', 'A campanha, pela Dra. Fernanda'],
-    ['editado1.mp4', 'historia-poster.jpg', 'A causa na voz de quem participou'],
-    ['tiago1.mp4', 'camiseta-poster.jpg', 'O momento de vestir a causa'],
-    ['vere2.mp4', 'acolhimento-poster.jpg', 'Um olhar atento para cada pessoa'],
-    ['vide_vere.mp4', 'gesto-poster.jpg', 'Técnica e cuidado, de perto'],
-    ['video_vere3.mp4', 'conexoes-poster.jpg', 'Mais uma voz pela causa']
+    ['botox_rosa.mp4', 'fernanda-poster.jpg', 'Um convite da Dra. Fernanda', 'convite'],
+    ['fernanda1.mp4', 'fernanda1-poster.jpg', 'A campanha, pela Dra. Fernanda', 'proposito'],
+    ['editado1.mp4', 'historia-poster.jpg', 'A causa na voz de quem participou', 'historia'],
+    ['tiago1.mp4', 'camiseta-poster.jpg', 'O momento de vestir a causa', 'gesto'],
+    ['vere2.mp4', 'acolhimento-poster.jpg', 'Um olhar atento para cada pessoa', 'cuidado'],
+    ['vide_vere.mp4', 'gesto-poster.jpg', 'Técnica e cuidado, de perto', 'bastidores'],
+    ['video_vere3.mp4', 'conexoes-poster.jpg', 'Mais uma voz pela causa', 'conexoes']
   ];
   let heroClipIndex = -1;
   if (heroReel && heroWatch) {
@@ -103,9 +103,10 @@
       const clipIndex = Math.min(heroClips.length - 1, Math.floor(heroReel.currentTime / 5));
       if (clipIndex === heroClipIndex) return;
       heroClipIndex = clipIndex;
-      const [file, poster, title] = heroClips[clipIndex];
+      const [file, poster, title, videoId] = heroClips[clipIndex];
       const source = `assets/optimized/videos/${file}`;
       heroWatch.dataset.media = campaignAsset(source);
+      heroWatch.dataset.trackVideo = videoId;
       heroWatch.dataset.poster = campaignAsset(`assets/media/${poster}`);
       heroWatch.dataset.title = title;
       heroWatch.dataset.description = 'Um registro da campanha Botox Rosa na FB Harmonização & Odontologia.';
@@ -179,6 +180,8 @@
         dialogMedia.append(photo);
       } else {
         const video = document.createElement('video');
+        video.dataset.trackVideo = trigger.dataset.trackVideo || '';
+        video.dataset.trackPlacement = trigger.dataset.trackPlacement || (trigger.hasAttribute('data-hero-watch') ? 'hero' : 'galeria');
         video.controls = true;
         video.playsInline = true;
         video.preload = 'metadata';
