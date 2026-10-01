@@ -163,8 +163,13 @@
 .doctor-copy .eyebrow, .doctor-copy .section-index { color: #c5d5c4; }
 .doctor-copy h2 { margin-top: 25px; }
 .doctor-copy h2 em { color: #efc1d4; }
-.doctor-specialty { font-size: 9px; letter-spacing: .09em; color: #e5c8d4; line-height: 1.8; margin: 24px 0; }
+.doctor-service-title { font-family: var(--sans); font-size: 19px; font-weight: 600; line-height: 1.5; color: #f6dce7; margin-top: 23px; }
+.doctor-specialty { font-size: 10px; letter-spacing: .06em; color: #e5c8d4; line-height: 1.8; margin: 10px 0 22px; }
 .doctor-copy>p:not(.eyebrow):not(.doctor-specialty) { font-size: 14px; color: #d6e0d3; line-height: 1.85; }
+.doctor-address { display: grid; gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #c6d5c336; font-style: normal; font-size: 13px; line-height: 1.7; color: #f9f1e8; }
+.doctor-address>a:first-child { display: flex; align-items: flex-start; gap: 10px; }
+.doctor-address .icon { width: 18px; height: 18px; margin-top: 3px; color: #efc1d4; }
+.doctor-address>a:hover { color: #efc1d4; }
 .doctor-signoff { border-color: #c6d5c336; gap: 17px; padding-block: 20px; margin-top: 25px; }
 .doctor-signoff .icon, .doctor-signoff em { color: #edbfd0; }
 .doctor-signoff>span { font-size: 22px; }

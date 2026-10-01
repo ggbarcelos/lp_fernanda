@@ -20,11 +20,19 @@ Os arquivos `index.html` da raiz e `botox-rosa/index.html` incluem metadados est
 - Os banners usam a foto `assets/material/fotos/principal.png`, com o rosto inteiro e a identidade visual da campanha.
 - Especificações, prompt de criação e orientações sobre publicação/cache em [compartilhamento-social.md](compartilhamento-social.md).
 
-O domínio precisa resolver para o GitHub Pages e ter HTTPS disponível para os leitores externos acessarem as imagens. Em 30/09/2026, o Pages já estava configurado para `main` e `/`, com o domínio cadastrado, mas a consulta DNS ainda não retornava registros A e o HTTPS não estava imposto.
+Em 01/10/2026, o domínio público retornou HTTP 200 por HTTPS. O GitHub Pages está configurado para `main` e `/`, com `fernandabeltrao.com.br` cadastrado e HTTPS obrigatório.
 - As fotos abrem em um diálogo de ampliação; os vídeos abrem com áudio e controles nativos. O diálogo fecha pelo botão, por Escape ou pelo fundo e devolve o foco ao elemento de origem.
 - A hero reproduz `assets/media/hero-mix.mp4`: um mix em loop de 35 segundos, com trechos de 5 segundos dos sete vídeos de `assets/material/videos`. Ordem: `botox_rosa`, `fernanda1`, `editado1`, `tiago1`, `vere2`, `vide_vere`, `video_vere3`. Cada trecho usa os segundos 2 a 7 do original; saída vertical 540 × 960, 30 fps, H.264 sem áudio. O botão “Assistir com áudio” acompanha a cena atual e abre seu vídeo original completo. A reprodução pausa fora da área visível, ao abrir o diálogo, ao esconder a aba ou quando o navegador indica preferência por movimento reduzido.
 - Os vídeos completos carregam apenas quando escolhidos. Versões locais em H.264/AAC, com início rápido, em `assets/media`. Os vídeos originais estão em `assets/material/videos` e as fotos em `assets/material/fotos`; as versões dos vídeos para a LP ficam em `assets/media`.
 - Menu móvel, FAQ nativo, animações de entrada e selo animado. O botão “Pausar movimento” foi removido. A preferência por movimento reduzido do navegador continua sendo respeitada, pausando os vídeos de fundo e as animações decorativas. O conteúdo permanece visível sem JavaScript.
+
+## SEO local e GEO
+
+Em 01/10/2026, títulos e descrição de busca foram atualizados para Botox Rosa, botox no Menino Deus e harmonização facial em Porto Alegre. A apresentação da profissional e o FAQ identificam a clínica, o bairro, a cidade, o endereço e o contato. O título da hero, a oferta e a descrição de compartilhamento aprovada foram preservados.
+
+O HTML contém dados estruturados de site, página, campanha, clínica (`Dentist`), profissional e serviços. A raiz mantém o redirecionamento e a mesma URL canônica. `robots.txt` permite rastreamento e informa o `sitemap.xml`, que contém apenas a URL canônica da LP. Análise, validação e próximos passos externos em [seo-geo.md](seo-geo.md).
+
+O script assíncrono do Microsoft Clarity, projeto `yqwnjvqus9`, está no cabeçalho da LP. A página de redirecionamento da raiz não repete a integração.
 
 ## Conteúdo da campanha
 

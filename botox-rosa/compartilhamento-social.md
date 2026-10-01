@@ -13,7 +13,7 @@ As tags `og:title`, `og:description`, `og:type`, `og:locale`, `og:site_name`, `o
 
 As tags ficam no HTML inicial para os leitores obterem a prévia sem executar JavaScript. Isso também cobre o compartilhamento da raiz, que redireciona navegadores para `/botox-rosa/`. Não há dependência de JavaScript para selecionar o banner.
 
-A descrição padrão, Open Graph e Twitter Cards usam exatamente o texto informado: “Ao fazer seu botox ou um procedimento de harmonização facial, você ganha a camiseta oficial do IMAMA 2026 e aproveita condições especiais”.
+As descrições Open Graph e Twitter Cards usam exatamente o texto informado: “Ao fazer seu botox ou um procedimento de harmonização facial, você ganha a camiseta oficial do IMAMA 2026 e aproveita condições especiais”. A descrição padrão para mecanismos de busca foi otimizada em 01/10/2026 para identificar os serviços, Menino Deus e Porto Alegre; isso não altera a descrição de compartilhamento aprovada.
 
 ## Publicação e cache
 
