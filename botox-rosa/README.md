@@ -3,12 +3,23 @@
 Landing page da campanha da Dra. Fernanda Beltrão. HTML, CSS e JavaScript estáticos, compatíveis com a hospedagem atual do projeto. O `index.html` da raiz redireciona automaticamente para `botox-rosa/`, preservando parâmetros e âncoras quando o JavaScript está disponível. Há redirecionamento por HTML para navegadores sem JavaScript; o conteúdo original da clínica permanece no arquivo da raiz.
 
 - Página: `botox-rosa/index.html`.
-- Caminho após a publicação do projeto: `/lp_fernanda/botox-rosa/`.
+- Domínio de publicação: `https://fernandabeltrao.com.br/botox-rosa/`.
 - WhatsApp: `5551986390931`, reutilizado da página principal. Todos os CTAs têm mensagem específica da campanha.
 - Identidade da clínica: verde `#4A6F70`, dourado `#D7B36A`, logo e fotografias existentes. Rosa da campanha: `#A7496D`.
 - Sem bibliotecas JavaScript adicionais. Google Fonts é o único recurso visual externo; há fontes de sistema como alternativa.
 - Abertura com fundo verde, títulos grandes e foto e vídeo em proporções próximas: `assets/material/fotos/principal.png` em destaque à direita e os vídeos da campanha à esquerda. No celular, os dois aparecem após o título. Transição direta para a campanha e profundidade suave ao rolar.
-- O álbum reúne nove fotos e nove vídeos intercalados, em três páginas de seis registros. As capas preservam o quadro completo com fundo desfocado, e as legendas ficam abaixo das imagens. A foto principal permanece na abertura e no compartilhamento social.
+- O álbum reúne nove fotos e nove vídeos intercalados, em três páginas de seis registros. As capas preservam o quadro completo com fundo desfocado, e as legendas ficam abaixo das imagens. A foto principal permanece na abertura e compõe os banners de compartilhamento social.
+
+## Compartilhamento de links
+
+Os arquivos `index.html` da raiz e `botox-rosa/index.html` incluem metadados estáticos Open Graph e Twitter Cards, disponíveis também para leitores que não executam JavaScript. Ambos usam o domínio `fernandabeltrao.com.br` e o mesmo título da campanha. A raiz continua redirecionando para a LP.
+
+- Open Graph: `assets/media/botox-rosa-social-2026-v1.jpg`, JPEG de 1200 × 630 px.
+- X: `assets/media/botox-rosa-social-x-2026-v1.jpg`, JPEG de 1200 × 600 px.
+- Os banners usam a foto `assets/material/fotos/principal.png`, com o rosto inteiro e a identidade visual da campanha.
+- Especificações, prompt de criação e orientações sobre publicação/cache em [compartilhamento-social.md](compartilhamento-social.md).
+
+O domínio precisa resolver para o GitHub Pages e ter HTTPS disponível para os leitores externos acessarem as imagens. Em 30/09/2026, o Pages já estava configurado para `main` e `/`, com o domínio cadastrado, mas a consulta DNS ainda não retornava registros A e o HTTPS não estava imposto.
 - As fotos abrem em um diálogo de ampliação; os vídeos abrem com áudio e controles nativos. O diálogo fecha pelo botão, por Escape ou pelo fundo e devolve o foco ao elemento de origem.
 - A hero reproduz `assets/media/hero-mix.mp4`: um mix em loop de 35 segundos, com trechos de 5 segundos dos sete vídeos de `assets/material/videos`. Ordem: `botox_rosa`, `fernanda1`, `editado1`, `tiago1`, `vere2`, `vide_vere`, `video_vere3`. Cada trecho usa os segundos 2 a 7 do original; saída vertical 540 × 960, 30 fps, H.264 sem áudio. O botão “Assistir com áudio” acompanha a cena atual e abre seu vídeo original completo. A reprodução pausa fora da área visível, ao abrir o diálogo, ao esconder a aba ou quando o navegador indica preferência por movimento reduzido.
 - Os vídeos completos carregam apenas quando escolhidos. Versões locais em H.264/AAC, com início rápido, em `assets/media`. Os vídeos originais estão em `assets/material/videos` e as fotos em `assets/material/fotos`; as versões dos vídeos para a LP ficam em `assets/media`.
