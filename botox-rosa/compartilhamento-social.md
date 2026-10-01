@@ -4,10 +4,10 @@
 
 | Uso | Arquivo | Dimensões |
 | --- | --- | --- |
-| Open Graph, para leitores como Facebook, WhatsApp e LinkedIn | `assets/media/botox-rosa-social-2026-v1.jpg` | 1200 × 630 px |
-| Twitter Cards / X, com `summary_large_image` | `assets/media/botox-rosa-social-x-2026-v1.jpg` | 1200 × 600 px |
+| Open Graph, para leitores como Facebook, WhatsApp e LinkedIn | `assets/media/botox-rosa-social-2026-v2.jpg` | 1200 × 630 px |
+| Twitter Cards / X, com `summary_large_image` | `assets/media/botox-rosa-social-x-2026-v2.jpg` | 1200 × 600 px |
 
-Ambos são JPEG opaco, comprimidos para compartilhamento, abaixo de 300 KB. A margem da composição preserva o rosto e os textos no corte mais horizontal da versão para X. A foto original não foi modificada.
+Ambos são JPEG opaco, comprimidos para compartilhamento, abaixo de 300 KB. A margem da composição preserva o rosto e os textos no corte mais horizontal da versão para X. A foto original não foi modificada. A versão v2 remove a fita rosa e seu contorno dourado entre o fundo verde e a fotografia, mantendo a linha dourada horizontal sob a data. Os HTMLs usam novas URLs de imagem; as exportações v1 foram preservadas.
 
 As tags `og:title`, `og:description`, `og:type`, `og:locale`, `og:site_name`, `og:url`, `og:image`, `og:image:secure_url`, `og:image:type`, `og:image:width`, `og:image:height` e `og:image:alt` estão nos dois HTMLs. Twitter Cards tem título, descrição, imagem e texto alternativo próprios. Os endereços de imagens e canonical são absolutos, em HTTPS, no domínio `fernandabeltrao.com.br`.
 
@@ -29,13 +29,35 @@ O banner é uma prévia de **link**. Publicações de imagem em feed, Stories ou
 - [Meta: Images in Link Shares](https://developers.facebook.com/docs/sharing/webmasters/images/): a página retornou limite de requisições durante esta verificação. A exportação Open Graph usa o formato horizontal de 1200 × 630 px.
 - A antiga documentação do X para `summary_large_image` redireciona para [o portal atual](https://docs.x.com/overview), sem especificação de Cards no conteúdo retornado. A exportação dedicada usa 2:1; não é apresentada aqui como uma especificação recém-publicada do X.
 
-## Criação da arte
+## Edição atual (v2, sem fita rosa)
+
+Modo: ferramenta integrada `image_gen`, usando o banner v1 como alvo de edição. Exportação técnica com `sips` para as mesmas dimensões finais. A fita separadora foi removida nas versões Open Graph e X; textos e enquadramento foram conferidos visualmente.
+
+Prompt final da edição:
+
+```text
+Use case: precise-object-edit.
+Input image 1 is the edit target: the existing Botox Rosa social banner.
+Make one targeted change: completely remove the decorative curved pink ribbon that separates the teal green text panel from Fernanda's photograph, including the thin gold contour following that ribbon. Fill its former area by naturally extending the existing teal panel and the original photographic background, producing a clean border between the green area and photograph with no ribbon or decorative separator. Keep the existing overall curved silhouette if helpful, but no pink strip, gold border, shadow or replacement ornament.
+Preserve everything else exactly: Fernanda's face, identity, age, expression, hairstyle, earrings, pose, pink outfit, shirt lettering, background, crop, position and proportions; green color and texture; every text's wording, position, font, size and color. Retain the small horizontal gold line below OUTUBRO 2026.
+Text unchanged, verbatim:
+BOTOX ROSA
+OUTUBRO 2026
+Cuidado com
+propósito
+Dra. Fernanda Beltrão
+CRO-RS: 12341
+fernandabeltrao.com.br
+Do not redesign, retype, add, or remove anything else. Preserve the entire head with the existing margin above it. Same landscape aspect ratio as input; target 1200 x 630 pixels. Opaque background.
+```
+
+## Criação da arte original
 
 Modo: ferramenta integrada `image_gen`, skill imagegen; referência local inspecionada antes da geração. Exportação técnica para JPEG e dimensões finais com `sips`. A composição foi conferida visualmente nas duas versões, com texto correto, enquadramento do rosto e identificação CRO-RS.
 
 Fonte: `assets/material/fotos/principal.png`.
 
-Prompt final utilizado:
+Prompt de criação original (v1):
 
 ```text
 Use case: identity-preserve / ads-marketing.

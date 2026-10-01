@@ -14,8 +14,9 @@ Landing page da campanha da Dra. Fernanda Beltrão. HTML, CSS e JavaScript está
 
 Os arquivos `index.html` da raiz e `botox-rosa/index.html` incluem metadados estáticos Open Graph e Twitter Cards, disponíveis também para leitores que não executam JavaScript. Ambos usam o domínio `fernandabeltrao.com.br` e o mesmo título da campanha. A raiz continua redirecionando para a LP.
 
-- Open Graph: `assets/media/botox-rosa-social-2026-v1.jpg`, JPEG de 1200 × 630 px.
-- X: `assets/media/botox-rosa-social-x-2026-v1.jpg`, JPEG de 1200 × 600 px.
+- Open Graph: `assets/media/botox-rosa-social-2026-v2.jpg`, JPEG de 1200 × 630 px.
+- X: `assets/media/botox-rosa-social-x-2026-v2.jpg`, JPEG de 1200 × 600 px.
+- A versão v2 remove a fita rosa que separava o fundo verde da fotografia. Os metadados usam as novas URLs para evitar reaproveitar a imagem v1 em cache.
 - Os banners usam a foto `assets/material/fotos/principal.png`, com o rosto inteiro e a identidade visual da campanha.
 - Especificações, prompt de criação e orientações sobre publicação/cache em [compartilhamento-social.md](compartilhamento-social.md).
 
