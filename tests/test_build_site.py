@@ -83,3 +83,11 @@ class VersionedBuildTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             builder.build(self.root, self.output, "a" * 40)
         self.assertTrue((self.output / "keep.txt").exists())
+
+    def test_responsive_candidates_are_fingerprinted_with_descriptors(self):
+        source = self.root / "botox-rosa/index.html"
+        source.write_text(source.read_text() + '<img srcset="assets/photo%20image.jpg 360w, assets/photo%20image.jpg 720w" sizes="50vw">')
+        builder.build(self.root, self.output, "a" * 40)
+        text = (self.output / "botox-rosa/index.html").read_text()
+        self.assertRegex(text, r'srcset="assets/photo%20image\.[a-f0-9]{16}\.jpg 360w, assets/photo%20image\.[a-f0-9]{16}\.jpg 720w"')
+        self.assertIn('sizes="50vw"', text)

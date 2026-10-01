@@ -1,6 +1,6 @@
 # Botox Rosa — Outubro 2026
 
-Landing page da campanha da Dra. Fernanda Beltrão. HTML, CSS e JavaScript estáticos, compatíveis com a hospedagem atual do projeto. O `index.html` da raiz redireciona automaticamente para `botox-rosa/`, preservando parâmetros e âncoras quando o JavaScript está disponível. Há redirecionamento por HTML para navegadores sem JavaScript; o conteúdo original da clínica permanece no arquivo da raiz.
+Landing page da campanha da Dra. Fernanda Beltrão. HTML, CSS e JavaScript estáticos, compatíveis com a hospedagem atual do projeto. O `index.html` da raiz redireciona automaticamente para `botox-rosa/`, preservando parâmetros e âncoras quando o JavaScript está disponível. Há redirecionamento por HTML para navegadores sem JavaScript. A raiz foi reduzida a uma página leve de redirecionamento com metadados sociais; a versão anterior da clínica permanece no histórico Git.
 
 - Página: `botox-rosa/index.html`.
 - Domínio de publicação: `https://fernandabeltrao.com.br/botox-rosa/`.
@@ -22,8 +22,8 @@ Os arquivos `index.html` da raiz e `botox-rosa/index.html` incluem metadados est
 
 Em 01/10/2026, o domínio público retornou HTTP 200 por HTTPS, com `fernandabeltrao.com.br` cadastrado e HTTPS obrigatório. A publicação passa a usar o workflow `.github/workflows/pages.yml`, acionado por atualizações no branch `main`.
 - As fotos abrem em um diálogo de ampliação; os vídeos abrem com áudio e controles nativos. O diálogo fecha pelo botão, por Escape ou pelo fundo e devolve o foco ao elemento de origem.
-- A hero reproduz `assets/media/hero-mix.mp4`: um mix em loop de 35 segundos, com trechos de 5 segundos dos sete vídeos de `assets/material/videos`. Ordem: `botox_rosa`, `fernanda1`, `editado1`, `tiago1`, `vere2`, `vide_vere`, `video_vere3`. Cada trecho usa os segundos 2 a 7 do original; saída vertical 540 × 960, 30 fps, H.264 sem áudio. O botão “Assistir com áudio” acompanha a cena atual e abre seu vídeo original completo. A reprodução pausa fora da área visível, ao abrir o diálogo, ao esconder a aba ou quando o navegador indica preferência por movimento reduzido.
-- Os vídeos completos carregam apenas quando escolhidos. Versões locais em H.264/AAC, com início rápido, em `assets/media`. Os vídeos originais estão em `assets/material/videos` e as fotos em `assets/material/fotos`; as versões dos vídeos para a LP ficam em `assets/media`.
+- A hero reproduz `assets/optimized/videos/hero-mix.mp4`: um mix em loop de 35 segundos, com trechos de 5 segundos dos sete vídeos de `assets/material/videos`. Ordem: `botox_rosa`, `fernanda1`, `editado1`, `tiago1`, `vere2`, `vide_vere`, `video_vere3`. Cada trecho usa os segundos 2 a 7 do original; saída vertical 540 × 960, 30 fps, H.264 sem áudio. O botão “Assistir com áudio” acompanha a cena atual e abre a versão para web do vídeo completo. A reprodução aguarda a foto principal e pausa fora da área visível, ao abrir o diálogo, ao esconder a aba ou quando o navegador indica preferência por movimento reduzido. A economia de dados do navegador evita reprodução automática, mantendo a reprodução por escolha do visitante.
+- Os vídeos completos carregam apenas quando escolhidos. As versões atuais em H.264/AAC, com início rápido e comparação de qualidade, ficam em `assets/optimized/videos`. Os vídeos originais estão em `assets/material/videos`, e as fotos, em `assets/material/fotos`. As versões anteriores em `assets/media` foram preservadas.
 - Menu móvel, FAQ nativo, animações de entrada e selo animado. O botão “Pausar movimento” foi removido. A preferência por movimento reduzido do navegador continua sendo respeitada, pausando os vídeos de fundo e as animações decorativas. O conteúdo permanece visível sem JavaScript.
 
 ## SEO local e GEO
@@ -66,6 +66,12 @@ Cada push no branch `main` executa os testes, gera `_site` e publica o site pelo
 A LP verifica `site-version.json` ao abrir, ao ser restaurada pelo histórico e ao voltar para a aba. Se o HTML estiver antigo, navega para a versão publicada sem exigir limpeza manual de cache, preservando parâmetros e âncoras. A verificação ignora o cache do navegador, tem timeout e não cria ciclos de recarregamento. Um diálogo de foto ou vídeo aberto termina antes da atualização. A prévia local permanece editável sem build.
 
 Detalhes, limites da hospedagem e comandos em [atualizacoes-cache.md](atualizacoes-cache.md).
+
+## Imagens e vídeos leves
+
+As fotos e capas usam versões responsivas com `srcset` e `sizes`, WebP e decodificação assíncrona. A galeria cria o fundo desfocado a partir da imagem que já carregou, evitando baixar todo o álbum na abertura. A ampliação da foto principal usa WebP sem perdas; as outras fotografias ampliadas usam seus originais. Logos em WebP sem perdas preservam transparência e letras.
+
+Os vídeos mantêm duração, quadros, áudio e enquadramento. Recompressões foram aceitas somente quando ficaram menores e atingiram média VMAF de pelo menos 95 na comparação amostrada; nos demais casos, os fluxos originais foram mantidos com início rápido. Relatório, medidas e regeneração em [otimizacao-performance.md](otimizacao-performance.md).
 
 ## Refatoração das seções após a hero
 

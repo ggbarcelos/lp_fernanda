@@ -1,0 +1,788 @@
+{
+  "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 14.52.45.jpeg": {
+    "source_sha256": "324e94bec4d686ddb3fa8a2f07f907dd23a04257df819e56d21a6f6b84cb05c3",
+    "source_bytes": 147428,
+    "width": 900,
+    "height": 1600,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-52-45-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 38228
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-52-45-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 82610
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-52-45-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 126540
+      }
+    ],
+    "full": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 14.52.45.jpeg"
+  },
+  "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 14.53.07.jpeg": {
+    "source_sha256": "1aab38016e382da51563c309db12e4de34ca4c3022834cc2e8b1f0be8ca17e4f",
+    "source_bytes": 167059,
+    "width": 900,
+    "height": 1600,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-53-07-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 42062
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-53-07-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 95148
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-53-07-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 153226
+      }
+    ],
+    "full": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 14.53.07.jpeg"
+  },
+  "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 14.53.17.jpeg": {
+    "source_sha256": "3322e241ee8311fa45e7609cb91f384e81d5652d11d8fd61f75c90962a06221b",
+    "source_bytes": 136907,
+    "width": 900,
+    "height": 1600,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-53-17-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 32240
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-53-17-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 70860
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-53-17-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 117186
+      }
+    ],
+    "full": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 14.53.17.jpeg"
+  },
+  "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 14.53.18.jpeg": {
+    "source_sha256": "6001c693188cb56b62809f168d8c42e09ac1fc5d9578cd93d8744079093f8199",
+    "source_bytes": 157835,
+    "width": 900,
+    "height": 1600,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-53-18-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 33476
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-53-18-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 91136
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-14-53-18-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 147704
+      }
+    ],
+    "full": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 14.53.18.jpeg"
+  },
+  "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.38.47.jpeg": {
+    "source_sha256": "004429a8050b5fb03645931b287e9fe9a0a721bc1f0a19a31605265c42b690e7",
+    "source_bytes": 105650,
+    "width": 720,
+    "height": 1280,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-18-38-47-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 43160
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-18-38-47-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 110124
+      },
+      {
+        "path": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.38.47.jpeg",
+        "width": 720,
+        "height": 1280,
+        "bytes": 105650
+      }
+    ],
+    "full": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.38.47.jpeg"
+  },
+  "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.39.17.jpeg": {
+    "source_sha256": "6eade68a81a6b206b011bea81286a27705a1ddb5d8f0a96c6e46c522f89f5ae6",
+    "source_bytes": 71228,
+    "width": 720,
+    "height": 1280,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-18-39-17-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 26622
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-18-39-17-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 60330
+      },
+      {
+        "path": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.39.17.jpeg",
+        "width": 720,
+        "height": 1280,
+        "bytes": 71228
+      }
+    ],
+    "full": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.39.17.jpeg"
+  },
+  "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.41.06.jpeg": {
+    "source_sha256": "809201c14d381efd91572e71221db6b19757eca68909ada03e26acf7e40cc0df",
+    "source_bytes": 107217,
+    "width": 720,
+    "height": 1280,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-18-41-06-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 45914
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-18-41-06-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 112150
+      },
+      {
+        "path": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.41.06.jpeg",
+        "width": 720,
+        "height": 1280,
+        "bytes": 107217
+      }
+    ],
+    "full": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.41.06.jpeg"
+  },
+  "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.42.05.jpeg": {
+    "source_sha256": "d8afca99e9ef86c0f0313074b56e265b0a07b6f694126d0a2585af135d978d92",
+    "source_bytes": 88799,
+    "width": 720,
+    "height": 1280,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-18-42-05-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 37980
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/whatsapp-image-2026-09-30-at-18-42-05-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 84984
+      },
+      {
+        "path": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.42.05.jpeg",
+        "width": 720,
+        "height": 1280,
+        "bytes": 88799
+      }
+    ],
+    "full": "botox-rosa/assets/material/fotos/WhatsApp Image 2026-09-30 at 18.42.05.jpeg"
+  },
+  "botox-rosa/assets/material/fotos/foto_tiago.jpeg": {
+    "source_sha256": "d076e2ce509e68c78022b1dc2af4b363733d3c31acb4b317f7ab786e37dcda4a",
+    "source_bytes": 207750,
+    "width": 1179,
+    "height": 1401,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/foto-tiago-360.webp",
+        "width": 360,
+        "height": 428,
+        "bytes": 34388
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/foto-tiago-640.webp",
+        "width": 640,
+        "height": 761,
+        "bytes": 84686
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/foto-tiago-960.webp",
+        "width": 960,
+        "height": 1141,
+        "bytes": 155002
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/foto-tiago-1179.webp",
+        "width": 1179,
+        "height": 1401,
+        "bytes": 206824
+      }
+    ],
+    "full": "botox-rosa/assets/material/fotos/foto_tiago.jpeg"
+  },
+  "botox-rosa/assets/material/fotos/foto_vere.jpeg": {
+    "source_sha256": "0bd46b3331aeb0c996f33c0540fd4755399fe580f39d30d03e248b6181c522fd",
+    "source_bytes": 179441,
+    "width": 1179,
+    "height": 1598,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/foto-vere-360.webp",
+        "width": 360,
+        "height": 488,
+        "bytes": 35466
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/foto-vere-640.webp",
+        "width": 640,
+        "height": 867,
+        "bytes": 77688
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/foto-vere-960.webp",
+        "width": 960,
+        "height": 1301,
+        "bytes": 121870
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/foto-vere-1179.webp",
+        "width": 1179,
+        "height": 1598,
+        "bytes": 153532
+      }
+    ],
+    "full": "botox-rosa/assets/material/fotos/foto_vere.jpeg"
+  },
+  "botox-rosa/assets/material/fotos/imama.jpeg": {
+    "source_sha256": "a746c02a75de5c7ba097b21f45f9eeb72b3e870ceb5cfeec0196865ca5a466b4",
+    "source_bytes": 183775,
+    "width": 1080,
+    "height": 1080,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/imama-360.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 37056
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/imama-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 82494
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/imama-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 142616
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/imama-1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "bytes": 171694
+      }
+    ],
+    "full": "botox-rosa/assets/material/fotos/imama.jpeg"
+  },
+  "botox-rosa/assets/material/fotos/principal.png": {
+    "source_sha256": "416ec43e8b59033ffec082ba4c85855846a742def001a5eb42e150d26463aa9f",
+    "source_bytes": 1721778,
+    "width": 1033,
+    "height": 1523,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/principal-360.webp",
+        "width": 360,
+        "height": 531,
+        "bytes": 38798
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/principal-640.webp",
+        "width": 640,
+        "height": 944,
+        "bytes": 80408
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/principal-960.webp",
+        "width": 960,
+        "height": 1415,
+        "bytes": 137572
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/principal-1033.webp",
+        "width": 1033,
+        "height": 1523,
+        "bytes": 152498
+      }
+    ],
+    "full": "botox-rosa/assets/optimized/images/principal-original.webp"
+  },
+  "botox-rosa/assets/media/acolhimento-poster.jpg": {
+    "source_sha256": "3e758772cd4c70fd992eb3a60c5b3e5b29c10569e42f3d7dbe67b18f7a154075",
+    "source_bytes": 54878,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/acolhimento-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 31698
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/acolhimento-poster-540.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 50666
+      }
+    ],
+    "full": "botox-rosa/assets/media/acolhimento-poster.jpg"
+  },
+  "botox-rosa/assets/media/album-bastidores-poster.jpg": {
+    "source_sha256": "10233cf4c389be67e83d1a9c4d67196b61c4f743224cda353ff64d5a28c09928",
+    "source_bytes": 38102,
+    "width": 540,
+    "height": 954,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/album-bastidores-poster-360.webp",
+        "width": 360,
+        "height": 636,
+        "bytes": 31764
+      },
+      {
+        "path": "botox-rosa/assets/media/album-bastidores-poster.jpg",
+        "width": 540,
+        "height": 954,
+        "bytes": 38102
+      }
+    ],
+    "full": "botox-rosa/assets/media/album-bastidores-poster.jpg"
+  },
+  "botox-rosa/assets/media/album-conexoes-poster.jpg": {
+    "source_sha256": "2219f797de7feb82fe97ce01d198696c88e2a6ef85d83f43e691c8ec664037b4",
+    "source_bytes": 42424,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/album-conexoes-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 35768
+      },
+      {
+        "path": "botox-rosa/assets/media/album-conexoes-poster.jpg",
+        "width": 540,
+        "height": 960,
+        "bytes": 42424
+      }
+    ],
+    "full": "botox-rosa/assets/media/album-conexoes-poster.jpg"
+  },
+  "botox-rosa/assets/media/album-convite-poster.jpg": {
+    "source_sha256": "f09f352553e3e43e71be7d6ccdfff3122b0d6a6496ed4cf2bec57c6e68785df0",
+    "source_bytes": 37005,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/album-convite-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 32244
+      },
+      {
+        "path": "botox-rosa/assets/media/album-convite-poster.jpg",
+        "width": 540,
+        "height": 960,
+        "bytes": 37005
+      }
+    ],
+    "full": "botox-rosa/assets/media/album-convite-poster.jpg"
+  },
+  "botox-rosa/assets/media/album-cuidado-poster.jpg": {
+    "source_sha256": "6acc302084408d76d1b0b6500a47818ac7ce4944a3def514c5bb8cedc5498526",
+    "source_bytes": 40547,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/album-cuidado-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 33260
+      },
+      {
+        "path": "botox-rosa/assets/media/album-cuidado-poster.jpg",
+        "width": 540,
+        "height": 960,
+        "bytes": 40547
+      }
+    ],
+    "full": "botox-rosa/assets/media/album-cuidado-poster.jpg"
+  },
+  "botox-rosa/assets/media/album-gesto-poster.jpg": {
+    "source_sha256": "bb8a3b5596366b8f32d54ab0dfb12fe49d82feb35b4aeeb4888d319dfaf2a5ca",
+    "source_bytes": 37103,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/album-gesto-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 33418
+      },
+      {
+        "path": "botox-rosa/assets/media/album-gesto-poster.jpg",
+        "width": 540,
+        "height": 960,
+        "bytes": 37103
+      }
+    ],
+    "full": "botox-rosa/assets/media/album-gesto-poster.jpg"
+  },
+  "botox-rosa/assets/media/album-historia-poster.jpg": {
+    "source_sha256": "3763c353ff446aacd6c0660c5c22865cacadb088b7a214f77ec016bb4ce0f22d",
+    "source_bytes": 43742,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/album-historia-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 39256
+      },
+      {
+        "path": "botox-rosa/assets/media/album-historia-poster.jpg",
+        "width": 540,
+        "height": 960,
+        "bytes": 43742
+      }
+    ],
+    "full": "botox-rosa/assets/media/album-historia-poster.jpg"
+  },
+  "botox-rosa/assets/media/camiseta-poster.jpg": {
+    "source_sha256": "ce3ffdc1efa3f43a4ac1e2581d1cc6471f995776f36051a7375faf0fe02f790e",
+    "source_bytes": 83888,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/camiseta-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 49850
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/camiseta-poster-540.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 82714
+      }
+    ],
+    "full": "botox-rosa/assets/media/camiseta-poster.jpg"
+  },
+  "botox-rosa/assets/media/conexoes-poster.jpg": {
+    "source_sha256": "2219f797de7feb82fe97ce01d198696c88e2a6ef85d83f43e691c8ec664037b4",
+    "source_bytes": 42424,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/conexoes-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 35768
+      },
+      {
+        "path": "botox-rosa/assets/media/conexoes-poster.jpg",
+        "width": 540,
+        "height": 960,
+        "bytes": 42424
+      }
+    ],
+    "full": "botox-rosa/assets/media/conexoes-poster.jpg"
+  },
+  "botox-rosa/assets/media/fernanda-poster.jpg": {
+    "source_sha256": "a45cffbbf2284a884ef960eb020e04c4631a15ddaa5ab4830285c17ea60c81f9",
+    "source_bytes": 48716,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/fernanda-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 28898
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/fernanda-poster-540.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 45006
+      }
+    ],
+    "full": "botox-rosa/assets/media/fernanda-poster.jpg"
+  },
+  "botox-rosa/assets/media/fernanda1-poster.jpg": {
+    "source_sha256": "067fa6377902ea1dbb581341f011b72781cea3087170a665118539c44d16976a",
+    "source_bytes": 27152,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/fernanda1-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 21232
+      },
+      {
+        "path": "botox-rosa/assets/media/fernanda1-poster.jpg",
+        "width": 540,
+        "height": 960,
+        "bytes": 27152
+      }
+    ],
+    "full": "botox-rosa/assets/media/fernanda1-poster.jpg"
+  },
+  "botox-rosa/assets/media/gesto-poster.jpg": {
+    "source_sha256": "80e5d82d047f1aa8d5bd1877d7f15f530635c68cd81019f51cb7388e2dedd06d",
+    "source_bytes": 52797,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/gesto-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 29890
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/gesto-poster-540.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 45372
+      }
+    ],
+    "full": "botox-rosa/assets/media/gesto-poster.jpg"
+  },
+  "botox-rosa/assets/media/hero-mix-poster.jpg": {
+    "source_sha256": "8820da2f21a11473e06ce98a72c27a93ebeb0c1b5e49c17ae5e7f74062833025",
+    "source_bytes": 51680,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/hero-mix-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 28706
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/hero-mix-poster-540.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 43888
+      }
+    ],
+    "full": "botox-rosa/assets/media/hero-mix-poster.jpg"
+  },
+  "botox-rosa/assets/media/hero-poster.jpg": {
+    "source_sha256": "5ea480c46308280f2bcc619fca49842f73532bc24b7d94517a0950e127aea632",
+    "source_bytes": 77808,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/hero-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 46818
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/hero-poster-540.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 76708
+      }
+    ],
+    "full": "botox-rosa/assets/media/hero-poster.jpg"
+  },
+  "botox-rosa/assets/media/historia-poster.jpg": {
+    "source_sha256": "cf3637e102c541803c0775416ec885e3d12b4f63667ea8cf53cb85c3631cb681",
+    "source_bytes": 59667,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/historia-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 36702
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/historia-poster-540.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 56574
+      }
+    ],
+    "full": "botox-rosa/assets/media/historia-poster.jpg"
+  },
+  "botox-rosa/assets/media/registro-bastidores-poster.jpg": {
+    "source_sha256": "582459ebf3014ef01acc8b408b91091fb8c974bfe73f101e576a6b58f245e25a",
+    "source_bytes": 35371,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/registro-bastidores-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 29080
+      },
+      {
+        "path": "botox-rosa/assets/media/registro-bastidores-poster.jpg",
+        "width": 540,
+        "height": 960,
+        "bytes": 35371
+      }
+    ],
+    "full": "botox-rosa/assets/media/registro-bastidores-poster.jpg"
+  },
+  "botox-rosa/assets/media/registro-camiseta-poster.jpg": {
+    "source_sha256": "f16dd99e317e64108f466889502e81fef01818787de995937d8d3e9c036537a1",
+    "source_bytes": 35216,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/registro-camiseta-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 29092
+      },
+      {
+        "path": "botox-rosa/assets/media/registro-camiseta-poster.jpg",
+        "width": 540,
+        "height": 960,
+        "bytes": 35216
+      }
+    ],
+    "full": "botox-rosa/assets/media/registro-camiseta-poster.jpg"
+  },
+  "botox-rosa/assets/media/registro-encontro-poster.jpg": {
+    "source_sha256": "06c8a221a793891b7c622a01b1eeb690eb78670ae641fd27992612c8dbbcfab6",
+    "source_bytes": 36370,
+    "width": 540,
+    "height": 960,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/registro-encontro-poster-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 30978
+      },
+      {
+        "path": "botox-rosa/assets/media/registro-encontro-poster.jpg",
+        "width": 540,
+        "height": 960,
+        "bytes": 36370
+      }
+    ],
+    "full": "botox-rosa/assets/media/registro-encontro-poster.jpg"
+  },
+  "botox-rosa/assets/imama-logo.png": {
+    "source_sha256": "5e451077dd6cf3ebe8439c907037b04853bf1b0c2c5a16b201a0ac9d436cd139",
+    "source_bytes": 19246,
+    "width": 600,
+    "height": 216,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/imama-logo-600.webp",
+        "width": 600,
+        "height": 216,
+        "bytes": 12536
+      }
+    ],
+    "full": "botox-rosa/assets/optimized/images/imama-logo-600.webp"
+  },
+  "img/logo1.png": {
+    "source_sha256": "777d6ae569819e0f9fd60899837f7e9e9fa28d704e3fad4bbe5a0d456904a4b9",
+    "source_bytes": 42081,
+    "width": 556,
+    "height": 233,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/logo1-556.webp",
+        "width": 556,
+        "height": 233,
+        "bytes": 20526
+      }
+    ],
+    "full": "botox-rosa/assets/optimized/images/logo1-556.webp"
+  },
+  "img/logo2.png": {
+    "source_sha256": "434ebc8d95c157a00ae269bc115cb63574bc056b63a2a974ce8eb0a36a64089a",
+    "source_bytes": 43816,
+    "width": 461,
+    "height": 186,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/logo2-461.webp",
+        "width": 461,
+        "height": 186,
+        "bytes": 32338
+      }
+    ],
+    "full": "botox-rosa/assets/optimized/images/logo2-461.webp"
+  },
+  "img/logo_glauber.png": {
+    "source_sha256": "d3afeb75d1d2780eabae97b62afada675cb7a1daef6663539e9d1f104dffb3bb",
+    "source_bytes": 143801,
+    "width": 908,
+    "height": 275,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/logo-glauber-908.webp",
+        "width": 908,
+        "height": 275,
+        "bytes": 78536
+      }
+    ],
+    "full": "botox-rosa/assets/optimized/images/logo-glauber-908.webp"
+  }
+}

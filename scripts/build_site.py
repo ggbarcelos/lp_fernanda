@@ -15,6 +15,7 @@ ORIGIN = "https://fernandabeltrao.com.br"
 PUBLIC_DIRS = ("assets", "botox-rosa/assets", "img")
 PAGES = ("index.html", "botox-rosa/index.html")
 ATTR = re.compile(r'(?P<prefix>\b(?:src|href|poster|data-media|data-src|data-poster|content)=")(?P<url>[^"<>]*)(?P<suffix>")')
+SRCSET = re.compile(r'(?P<prefix>\bsrcset=")(?P<value>[^"<>]*)(?P<suffix>")')
 CSS_URL = re.compile(r"url\(\s*(['\"]?)([^)'\"]+)\1\s*\)")
 JSON_LD = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.S)
 
@@ -43,6 +44,16 @@ def asset_url(value, context, assets):
 
 def rewrite_css(text, context, assets):
     return CSS_URL.sub(lambda m: f"url('{asset_url(m[2], context, assets)}')", text)
+
+
+def rewrite_srcset(value, context, assets):
+    candidates = []
+    for candidate in html.unescape(value).split(","):
+        parts = candidate.strip().split()
+        if parts:
+            parts[0] = asset_url(parts[0], context, assets)
+            candidates.append(" ".join(parts))
+    return html.escape(", ".join(candidates), quote=True)
 
 
 def rewrite_json(value, context, assets):
@@ -86,6 +97,7 @@ def build(root, output, revision):
         path = Path(filename)
         text = (root / path).read_text(encoding="utf-8")
         text = ATTR.sub(lambda m: m["prefix"] + html.escape(html.unescape(asset_url(m["url"], path, assets)), quote=True) + m["suffix"], text)
+        text = SRCSET.sub(lambda m: m["prefix"] + rewrite_srcset(m["value"], path, assets) + m["suffix"], text)
         text = rewrite_css(text, path, assets)
         text = JSON_LD.sub(lambda m: m[1] + "\n" + json.dumps(rewrite_json(json.loads(m[2]), path, assets), ensure_ascii=False, indent=2) + "\n" + m[3], text)
         text = text.replace('name="site-version" content="development"', f'name="site-version" content="{revision}"')

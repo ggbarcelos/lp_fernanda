@@ -1,0 +1,101 @@
+[
+  {
+    "source": "botox-rosa/assets/material/videos/WhatsApp Video 2026-09-30 at 18.33.49.mp4",
+    "path": "botox-rosa/assets/optimized/videos/WhatsApp Video 2026-09-30 at 18.33.49.mp4",
+    "before_bytes": 322333,
+    "after_bytes": 128743,
+    "crf": 25,
+    "vmaf_mean": 95.732063,
+    "video_audio_streams_preserved": false
+  },
+  {
+    "source": "botox-rosa/assets/material/videos/WhatsApp Video 2026-09-30 at 18.40.33.mp4",
+    "path": "botox-rosa/assets/optimized/videos/WhatsApp Video 2026-09-30 at 18.40.33.mp4",
+    "before_bytes": 229556,
+    "after_bytes": 128846,
+    "crf": 25,
+    "vmaf_mean": 97.501228,
+    "video_audio_streams_preserved": false
+  },
+  {
+    "source": "botox-rosa/assets/material/videos/botox_rosa.mp4",
+    "path": "botox-rosa/assets/optimized/videos/botox_rosa.mp4",
+    "before_bytes": 8676976,
+    "after_bytes": 8703664,
+    "crf": null,
+    "vmaf_mean": 100.0,
+    "video_audio_streams_preserved": true
+  },
+  {
+    "source": "botox-rosa/assets/material/videos/editado1.mp4",
+    "path": "botox-rosa/assets/optimized/videos/editado1.mp4",
+    "before_bytes": 5467482,
+    "after_bytes": 5484222,
+    "crf": null,
+    "vmaf_mean": 100.0,
+    "video_audio_streams_preserved": true
+  },
+  {
+    "source": "botox-rosa/assets/material/videos/fernanda1.mp4",
+    "path": "botox-rosa/assets/optimized/videos/fernanda1.mp4",
+    "before_bytes": 6424588,
+    "after_bytes": 5243928,
+    "crf": 25,
+    "vmaf_mean": 96.115695,
+    "video_audio_streams_preserved": false
+  },
+  {
+    "source": "botox-rosa/assets/material/videos/tiago1.mp4",
+    "path": "botox-rosa/assets/optimized/videos/tiago1.mp4",
+    "before_bytes": 2201057,
+    "after_bytes": 1426677,
+    "crf": 25,
+    "vmaf_mean": 95.444068,
+    "video_audio_streams_preserved": false
+  },
+  {
+    "source": "botox-rosa/assets/material/videos/vere2.mp4",
+    "path": "botox-rosa/assets/optimized/videos/vere2.mp4",
+    "before_bytes": 3602174,
+    "after_bytes": 1860895,
+    "crf": 25,
+    "vmaf_mean": 95.014143,
+    "video_audio_streams_preserved": false
+  },
+  {
+    "source": "botox-rosa/assets/material/videos/vide_vere.mp4",
+    "path": "botox-rosa/assets/optimized/videos/vide_vere.mp4",
+    "before_bytes": 6830223,
+    "after_bytes": 5069491,
+    "crf": 24,
+    "vmaf_mean": 95.726574,
+    "video_audio_streams_preserved": false
+  },
+  {
+    "source": "botox-rosa/assets/material/videos/video_vere3.mp4",
+    "path": "botox-rosa/assets/optimized/videos/video_vere3.mp4",
+    "before_bytes": 3018199,
+    "after_bytes": 2288468,
+    "crf": 25,
+    "vmaf_mean": 96.23949,
+    "video_audio_streams_preserved": false
+  },
+  {
+    "source": "botox-rosa/assets/media/hero-mix.mp4",
+    "path": "botox-rosa/assets/optimized/videos/hero-mix.mp4",
+    "before_bytes": 6239932,
+    "after_bytes": 4112775,
+    "crf": 25,
+    "vmaf_mean": 96.000086,
+    "video_audio_streams_preserved": false
+  },
+  {
+    "source": "botox-rosa/assets/media/gesto.mp4",
+    "path": "botox-rosa/assets/optimized/videos/gesto.mp4",
+    "before_bytes": 1469034,
+    "after_bytes": 1234950,
+    "crf": 25,
+    "vmaf_mean": 97.440516,
+    "video_audio_streams_preserved": false
+  }
+]

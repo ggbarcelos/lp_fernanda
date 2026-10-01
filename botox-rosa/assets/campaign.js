@@ -81,6 +81,13 @@
 
   const heroReel = document.querySelector('[data-hero-reel]');
   const heroWatch = document.querySelector('[data-hero-watch]');
+  const heroImage = document.querySelector('.hero-portrait img');
+  let heroImageReady = !heroImage || heroImage.complete;
+  if (!heroImageReady) {
+    const finishHeroImage = () => { heroImageReady = true; syncAmbientVideos(); };
+    heroImage.addEventListener('load', finishHeroImage, { once: true });
+    heroImage.addEventListener('error', finishHeroImage, { once: true });
+  }
   const heroClips = [
     ['botox_rosa.mp4', 'fernanda-poster.jpg', 'Um convite da Dra. Fernanda'],
     ['fernanda1.mp4', 'fernanda1-poster.jpg', 'A campanha, pela Dra. Fernanda'],
@@ -97,7 +104,7 @@
       if (clipIndex === heroClipIndex) return;
       heroClipIndex = clipIndex;
       const [file, poster, title] = heroClips[clipIndex];
-      const source = `assets/material/videos/${file}`;
+      const source = `assets/optimized/videos/${file}`;
       heroWatch.dataset.media = campaignAsset(source);
       heroWatch.dataset.poster = campaignAsset(`assets/media/${poster}`);
       heroWatch.dataset.title = title;
@@ -110,7 +117,7 @@
   }
 
   function syncAmbientVideos() {
-    const canPlay = !motionIsPaused() && !document.hidden && !dialog.open;
+    const canPlay = heroImageReady && !navigator.connection?.saveData && !motionIsPaused() && !document.hidden && !dialog.open;
     ambientVideos.forEach(video => {
       if (canPlay && video.dataset.inView === 'true') {
         if (!video.hasAttribute('src')) video.src = video.dataset.src;
@@ -206,6 +213,14 @@
   });
 
   const albumCards = [...document.querySelectorAll('.moments-track>.moment-card')];
+  // Reuse the image selected by srcset; below-fold backgrounds must not prefetch the album.
+  document.querySelectorAll('.moment-visual img').forEach(image => {
+    function syncBackground() {
+      if (image.naturalWidth) image.parentElement.style.backgroundImage = `url("${image.currentSrc || image.src}")`;
+    }
+    image.addEventListener('load', syncBackground);
+    if (image.complete) syncBackground();
+  });
   const albumNavigation = document.querySelector('.album-pagination');
   if (albumCards.length && albumNavigation) {
     const pageSize = 6;
