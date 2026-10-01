@@ -13,6 +13,8 @@ As tags `og:title`, `og:description`, `og:type`, `og:locale`, `og:site_name`, `o
 
 As tags ficam no HTML inicial para os leitores obterem a prévia sem executar JavaScript. Isso também cobre o compartilhamento da raiz, que redireciona navegadores para `/botox-rosa/`. Não há dependência de JavaScript para selecionar o banner.
 
+A descrição padrão, Open Graph e Twitter Cards usam exatamente o texto informado: “Ao fazer seu botox ou um procedimento de harmonização facial, você ganha a camiseta oficial do IMAMA 2026 e aproveita condições especiais”.
+
 ## Publicação e cache
 
 1. Publicar os dois HTMLs e os dois JPEGs no branch `main`, pasta `/`, usado pelo GitHub Pages.
