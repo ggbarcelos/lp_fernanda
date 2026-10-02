@@ -77,6 +77,7 @@
   const dialogMedia = dialog.querySelector('.dialog-media');
   const parallaxItems = [...document.querySelectorAll('[data-parallax]')];
   let lastMediaTrigger;
+  let syncDiaryPlayback = () => {};
   const motionIsPaused = () => motionQuery.matches;
 
   const heroReel = document.querySelector('[data-hero-reel]');
@@ -119,6 +120,7 @@
 
   function syncAmbientVideos() {
     const canPlay = heroImageReady && !navigator.connection?.saveData && !motionIsPaused() && !document.hidden && !dialog.open;
+    syncDiaryPlayback();
     ambientVideos.forEach(video => {
       if (canPlay && video.dataset.inView === 'true') {
         if (!video.hasAttribute('src')) video.src = video.dataset.src;
@@ -222,23 +224,85 @@
     const thumbNav = diary.querySelector('.diary-thumbs');
     const thumbs = [];
     diary.classList.toggle('is-single', cards.length < 2);
+    const pauseButton = diary.querySelector('[data-diary-pause]');
+    const previews = cards.map(card => card.querySelector('video'));
+    previews.forEach(video => {
+      if (video?.poster) video.parentElement.style.backgroundImage = `url("${video.poster}")`;
+    });
     let current = 0;
+    let timer;
+    let inView = !('IntersectionObserver' in window);
+    let userPaused = false;
+    let focusPaused = false;
+    const canPreview = () => inView && !userPaused && !motionQuery.matches &&
+      !navigator.connection?.saveData && !document.hidden && !dialog.open;
+    const canMix = () => canPreview() && !focusPaused;
+
+    function stopTimer() {
+      clearTimeout(timer);
+      timer = undefined;
+    }
+    syncDiaryPlayback = () => {
+      const playing = canMix();
+      diary.classList.toggle('mix-playing', canPreview());
+      previews.forEach((video, position) => {
+        if (!video) return;
+        if (canPreview() && position === current) {
+          if (!video.hasAttribute('src')) video.src = video.dataset.previewSrc;
+          video.play().catch(() => { /* The cover and manual navigation remain available. */ });
+        } else video.pause();
+      });
+      if (!playing) stopTimer();
+      else if (!timer && cards.length > 1) {
+        timer = setTimeout(() => {
+          timer = undefined;
+          showDiaryRecord(current + 1);
+        }, cards[current].dataset.type === 'video' ? 6000 : 4500);
+      }
+      if (pauseButton) {
+        pauseButton.textContent = userPaused ? 'Retomar mix' : 'Pausar mix';
+        pauseButton.setAttribute('aria-pressed', String(userPaused));
+      }
+    };
     function showDiaryRecord(index) {
       if (!cards.length) return;
+      stopTimer();
       current = (index + cards.length) % cards.length;
-      const companion = !mobileQuery.matches && cards.length > 1 ? (current + 1) % cards.length : current;
       cards.forEach((card, position) => {
-        card.hidden = position !== current && position !== companion;
+        card.hidden = position !== current;
         card.classList.toggle('is-current', position === current);
-        // Defer all video requests until the visitor selects this record.
-        const preview = card.querySelector('video');
-        if (preview && !card.hidden && !preview.hasAttribute('src') && !navigator.connection?.saveData) {
-          preview.preload = 'metadata';
-          preview.src = preview.dataset.previewSrc;
+        const preview = previews[position];
+        if (preview && position !== current) {
+          preview.pause();
+          if (preview.readyState) preview.currentTime = 0;
         }
       });
       thumbs.forEach((thumb, position) => thumb.setAttribute('aria-pressed', String(position === current)));
-      diary.querySelector('[data-diary-status]').textContent = `${String(current + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+      const status = diary.querySelector('[data-diary-status]');
+      // Automatic changes stay quiet for screen readers; user navigation is announced.
+      status.setAttribute('aria-live', canMix() ? 'off' : 'polite');
+      status.textContent = `${String(current + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+      syncDiaryPlayback();
+    }
+    if (pauseButton) {
+      pauseButton.hidden = cards.length < 2;
+      pauseButton.addEventListener('click', () => {
+        userPaused = !userPaused;
+        syncDiaryPlayback();
+      });
+    }
+    diary.addEventListener('focusin', event => { focusPaused = event.target !== pauseButton; syncDiaryPlayback(); });
+    diary.addEventListener('focusout', event => {
+      if (!diary.contains(event.relatedTarget)) { focusPaused = false; syncDiaryPlayback(); }
+    });
+    motionQuery.addEventListener('change', syncDiaryPlayback);
+    navigator.connection?.addEventListener('change', syncDiaryPlayback);
+    if ('IntersectionObserver' in window) {
+      const mixObserver = new IntersectionObserver(entries => {
+        inView = entries[0].isIntersecting;
+        syncDiaryPlayback();
+      }, { threshold: .25 });
+      mixObserver.observe(diary);
     }
     if (thumbNav && cards.length > 1) {
       cards.forEach((card, index) => {

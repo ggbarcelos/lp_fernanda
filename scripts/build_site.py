@@ -61,8 +61,11 @@ def campaign_2026_media(root):
                 entry = optimized.get(file.relative_to(root).as_posix()) if kind == "video" else None
                 if entry and entry.get("source_sha256") == hashlib.sha256(file.read_bytes()).hexdigest():
                     video, poster = optimized_file(entry.get("path")), optimized_file(entry.get("poster"))
+                    preview = optimized_file(entry.get("preview"))
                     if video:
                         item["src"] = quote(video.relative_to(root / "botox-rosa").as_posix(), safe="/")
+                        if preview:
+                            item["preview"] = quote(preview.relative_to(root / "botox-rosa").as_posix(), safe="/")
                         if poster:
                             item["poster"] = quote(poster.relative_to(root / "botox-rosa").as_posix(), safe="/")
                 media.append(item)
@@ -78,18 +81,21 @@ def render_campaign_2026(text, root):
         number = f"{index + 1:02}"
         title = f"Botox Rosa 2026 · Registro {number}"
         source = html.escape(item["src"], quote=True)
-        action = "Ampliar foto" if item["type"] == "image" else "Assistir ao vídeo"
+        action = "Ampliar foto" if item["type"] == "image" else "Ver vídeo completo"
         icon = "expand" if item["type"] == "image" else "play"
         poster_attr = f' data-poster="{html.escape(item["poster"], quote=True)}"' if item.get("poster") else ""
         if item["type"] == "image":
             visual = f'<img src="{source}" alt="Registro da campanha Botox Rosa 2026 na clínica" loading="lazy" decoding="async">'
         else:
-            # Only the selected video fetches metadata, never the entire collection.
-            if item.get("poster"):
+            # Lightweight silent excerpts are loaded only while the mix is visible.
+            if item.get("preview"):
+                cover = f' poster="{html.escape(item["poster"], quote=True)}"' if item.get("poster") else ""
+                visual = f'<video data-preview-src="{html.escape(item["preview"], quote=True)}"{cover} preload="none" muted playsinline loop aria-hidden="true"></video>'
+            elif item.get("poster"):
                 visual = f'<img src="{html.escape(item["poster"], quote=True)}" alt="Capa de vídeo da campanha Botox Rosa 2026" loading="lazy" decoding="async">'
             else:
                 visual = f'<video data-preview-src="{source}" preload="none" muted playsinline aria-hidden="true"></video>'
-            visual += '<span class="diary-video-mark"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg><span>UMA HISTÓRIA EM VÍDEO</span></span>'
+            visual += '<span class="diary-video-mark"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg><span>VER VÍDEO COMPLETO</span></span>'
         cards.append(f'''<button type="button" class="diary-card" data-media="{source}" data-type="{item['type']}"{poster_attr} data-title="{title}" data-description="Um encontro de autocuidado na edição de 2026." data-track-video="campanha_2026_{number}" data-track-placement="campanha_2026" aria-label="{action}: {title}"{(' hidden' if index else '')}>
               <span class="diary-visual">{visual}</span>
               <span class="diary-card-action">{action} <svg class="icon" aria-hidden="true"><use href="#icon-{icon}"/></svg></span>

@@ -182,7 +182,7 @@ test('the HTML wires every CTA, video and section to stable labels before campai
   assert.equal(ctas.length, 9);
   assert.equal(new Set(ctas.map(tag => tag.match(/data-track-cta="([^"]+)"/)?.[1])).size, 9);
   const videos = [...html.matchAll(/<button\b[^>]*\bdata-media="[^"]+\.mp4"[^>]*>/g)].map(match => match[0]);
-  assert.equal(videos.length, 12);
+  assert.equal(videos.length, 13);
   assert.ok(videos.every(tag => /data-track-video="[a-z][a-z0-9_]{0,63}"/.test(tag)));
   assert.equal([...html.matchAll(/data-track-section="[^"]+"/g)].length, 7);
   assert.ok(html.includes('data-track-cta="campanha_2026"'));

@@ -105,3 +105,25 @@
   .diary-card { transition: none; }
   .diary-card:hover { transform: none; }
 }
+
+/* A single changing frame keeps the mix readable on desktop and mobile. */
+.diary-stage { grid-template-columns: minmax(0,1fr); max-width: 440px; margin-inline: auto; }
+.diary-card, .diary-card[data-type="video"] { transform: none; }
+.diary-card.is-current { animation: diary-appear .5s ease-out; }
+.diary-card:hover { transform: translateY(-2px); }
+.diary-visual>video { pointer-events: none; }
+.mix-playing .diary-video-mark { justify-content: end; padding-bottom: 16px; }
+.mix-playing .diary-video-mark .icon { width: 34px; height: 34px; padding: 10px; }
+.diary-hint { margin: 12px 3px 0; color: #77666e; font-size: 11px; line-height: 1.6; }
+.diary-controls .diary-pause { width: auto; padding-inline: 12px; border-radius: 24px; font: inherit; font-size: 10px; white-space: nowrap; }
+.diary-controls [data-diary-step="-1"] .icon { transform: rotate(180deg); }
+.diary-controls [data-diary-step="1"] .icon { transform: none; }
+@keyframes diary-appear { from { opacity: .3; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 760px) {
+  .diary-bottomline { flex-wrap: wrap; }
+  .diary-controls { margin-left: auto; }
+  .diary-stage { height: clamp(300px,90vw,380px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .diary-card.is-current { animation: none; }
+}

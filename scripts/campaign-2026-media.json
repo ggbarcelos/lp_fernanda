@@ -8,6 +8,21 @@
     "vmaf_mean": 93.885827,
     "video_audio_streams_preserved": false,
     "poster": "botox-rosa/assets/optimized/2026/posters/video1.jpg",
-    "source_sha256": "d39a09741ede49335d4ade5cf885651d1993cb19203e241767440331f832edd9"
+    "source_sha256": "d39a09741ede49335d4ade5cf885651d1993cb19203e241767440331f832edd9",
+    "preview": "botox-rosa/assets/optimized/2026/previews/video1.mp4",
+    "preview_bytes": 255331
+  },
+  {
+    "source": "botox-rosa/assets/2026/videos/video2.mp4",
+    "path": "botox-rosa/assets/optimized/2026/videos/video2.mp4",
+    "before_bytes": 5099621,
+    "after_bytes": 3377984,
+    "crf": 25,
+    "vmaf_mean": 93.851583,
+    "video_audio_streams_preserved": false,
+    "preview": "botox-rosa/assets/optimized/2026/previews/video2.mp4",
+    "preview_bytes": 270236,
+    "poster": "botox-rosa/assets/optimized/2026/posters/video2.jpg",
+    "source_sha256": "19eb76a98bb63572836a67310c69de4bf3d3a20674d45e2df150dc8fcaddb2d9"
   }
 ]
