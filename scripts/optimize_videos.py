@@ -11,21 +11,23 @@ ROOT = Path(__file__).resolve().parents[1]
 DESTINATION = ROOT / "botox-rosa/assets/optimized/videos"
 
 
-def optimize(source):
-    destination = DESTINATION / source.name
+def optimize(source, destination=None, minimum_quality=95, crfs=(25, 24)):
+    destination = destination or DESTINATION / source.name
+    destination.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as directory:
         candidate = Path(directory) / "candidate.mp4"
         metrics = Path(directory) / "vmaf.json"
         accepted = False
         score = 100.0
         selected_crf = None
-        for crf in (25, 24):
+        for crf in crfs:
             subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(source), "-map", "0:v:0", "-map", "0:a?", "-c:v", "libx264", "-preset", "veryslow", "-crf", str(crf), "-threads", "4", "-pix_fmt", "yuv420p", "-fps_mode", "passthrough", "-c:a", "copy", "-movflags", "+faststart", str(candidate)], check=True, capture_output=True)
             if candidate.stat().st_size >= source.stat().st_size:
                 break
             subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-threads", "2", "-i", str(candidate), "-threads", "2", "-i", str(source), "-lavfi", f"[0:v]setpts=PTS-STARTPTS[d];[1:v]setpts=PTS-STARTPTS[r];[d][r]libvmaf=log_fmt=json:log_path={metrics}:n_subsample=5:n_threads=2", "-an", "-f", "null", "-"], check=True, capture_output=True)
             score = json.loads(metrics.read_text())["pooled_metrics"]["vmaf"]["mean"]
-            if score >= 95:
+            print(f"{source.name}: CRF {crf}; VMAF {score:.2f}; {candidate.stat().st_size/1048576:.2f} MiB", flush=True)
+            if score >= minimum_quality:
                 accepted = True
                 selected_crf = crf
                 break

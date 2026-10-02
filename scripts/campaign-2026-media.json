@@ -1,0 +1,13 @@
+[
+  {
+    "source": "botox-rosa/assets/2026/videos/video1.mp4",
+    "path": "botox-rosa/assets/optimized/2026/videos/video1.mp4",
+    "before_bytes": 8401091,
+    "after_bytes": 5542952,
+    "crf": 25,
+    "vmaf_mean": 93.885827,
+    "video_audio_streams_preserved": false,
+    "poster": "botox-rosa/assets/optimized/2026/posters/video1.jpg",
+    "source_sha256": "d39a09741ede49335d4ade5cf885651d1993cb19203e241767440331f832edd9"
+  }
+]

@@ -219,12 +219,17 @@
   if (diary) {
     const cards = [...diary.querySelectorAll('.diary-card')];
     const steps = [...diary.querySelectorAll('[data-diary-step]')];
+    const thumbNav = diary.querySelector('.diary-thumbs');
+    const thumbs = [];
+    diary.classList.toggle('is-single', cards.length < 2);
     let current = 0;
     function showDiaryRecord(index) {
       if (!cards.length) return;
       current = (index + cards.length) % cards.length;
+      const companion = !mobileQuery.matches && cards.length > 1 ? (current + 1) % cards.length : current;
       cards.forEach((card, position) => {
-        card.hidden = position !== current;
+        card.hidden = position !== current && position !== companion;
+        card.classList.toggle('is-current', position === current);
         // Defer all video requests until the visitor selects this record.
         const preview = card.querySelector('video');
         if (preview && !card.hidden && !preview.hasAttribute('src') && !navigator.connection?.saveData) {
@@ -232,7 +237,34 @@
           preview.src = preview.dataset.previewSrc;
         }
       });
+      thumbs.forEach((thumb, position) => thumb.setAttribute('aria-pressed', String(position === current)));
       diary.querySelector('[data-diary-status]').textContent = `${String(current + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+    }
+    if (thumbNav && cards.length > 1) {
+      cards.forEach((card, index) => {
+        const thumb = document.createElement('button');
+        thumb.type = 'button';
+        thumb.className = 'diary-thumb';
+        const isVideo = card.dataset.type === 'video';
+        thumb.setAttribute('aria-label', `Ver ${isVideo ? 'vídeo' : 'foto'} ${index + 1} da campanha de 2026`);
+        thumb.setAttribute('aria-controls', 'diary-stage');
+        const previewSrc = card.dataset.poster || card.querySelector('.diary-visual img')?.getAttribute('src');
+        if (previewSrc) {
+          const image = document.createElement('img');
+          image.src = previewSrc;
+          image.alt = '';
+          image.loading = 'lazy';
+          image.decoding = 'async';
+          thumb.append(image);
+        }
+        const label = document.createElement('span');
+        label.textContent = `${String(index + 1).padStart(2, '0')} / ${isVideo ? 'Vídeo' : 'Foto'}`;
+        thumb.append(label);
+        thumb.addEventListener('click', () => showDiaryRecord(index));
+        thumbs.push(thumb);
+        thumbNav.append(thumb);
+      });
+      thumbNav.hidden = false;
     }
     steps.forEach(button => {
       button.hidden = cards.length < 2;
@@ -245,6 +277,7 @@
       showDiaryRecord(current + (event.key === 'ArrowRight' ? 1 : -1));
       if (focusedCard) cards[current].focus({ preventScroll: true });
     });
+    mobileQuery.addEventListener('change', () => showDiaryRecord(current));
     showDiaryRecord(0);
   }
 

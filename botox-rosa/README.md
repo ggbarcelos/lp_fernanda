@@ -12,7 +12,7 @@ Landing page da campanha da Dra. Fernanda Beltrão. HTML, CSS e JavaScript está
 
 ## Diário de outubro · 2026
 
-A seção `#campanha-2026` apresenta um registro por vez, com foto inteira, fundo desfocado e ampliação no diálogo existente. Com uma única foto, ela funciona como destaque editorial, sem espaços ou setas vazias. Com vários registros, surgem setas e contador; fotos e vídeos se alternam sem aumentar a altura da LP. É possível navegar também pelas setas do teclado. Vídeos abrem com áudio e controles por escolha do visitante; as prévias não reproduzem automaticamente. O álbum anterior está identificado como edição de 2025 em um `details` nativo: aberto por padrão no desktop e recolhido no celular (até 760 px). A mudança de tamanho da tela atualiza esse estado padrão. Links para `#momentos` abrem o álbum, inclusive no acesso direto à âncora, preservando a navegação anterior.
+A seção `#campanha-2026` apresenta dois registros lado a lado no desktop e um por vez no celular. As molduras claras, levemente inclinadas no desktop, lembram um álbum de encontros. As fotos ficam inteiras, com fundo desfocado e ampliação no diálogo existente. Com uma única foto, ela funciona como destaque editorial, sem espaços ou setas vazias. Com vários registros, surgem setas e contador; fotos e vídeos se alternam sem aumentar a altura da LP. É possível navegar também pelas setas do teclado. Vídeos abrem com áudio e controles por escolha do visitante; as prévias não reproduzem automaticamente. O álbum anterior está identificado como edição de 2025 em um `details` nativo: aberto por padrão no desktop e recolhido no celular (até 760 px). A mudança de tamanho da tela atualiza esse estado padrão. Links para `#momentos` abrem o álbum, inclusive no acesso direto à âncora, preservando a navegação anterior.
 
 Para adicionar registros, coloque os arquivos diretamente em:
 
@@ -21,7 +21,11 @@ Para adicionar registros, coloque os arquivos diretamente em:
 
 O build lê as pastas em toda publicação, atualiza contadores e cria URLs versionadas. Basta enviar os novos arquivos para o branch `main`, pelo fluxo de publicação existente; não é preciso cadastrar cada mídia no HTML ou JavaScript. Arquivos removidos também saem da seção na próxima publicação. GitHub Pages é estático: copiar arquivos só para uma pasta local não altera a página pública até que sejam publicados.
 
-Os nomes determinam a ordem natural (`01`, `02`, `10`); fotos e vídeos são intercalados. Arquivos ocultos, atalhos e formatos não suportados ficam fora do álbum. Não há limite de registros, e a altura da seção continua fixa.
+Os nomes determinam a ordem natural (`01`, `02`, `10`); vídeos e fotos são intercalados, começando pelo vídeo. Miniaturas de foto e vídeo permitem escolher o registro diretamente, além das setas e do teclado. Arquivos ocultos, atalhos e formatos não suportados ficam fora do álbum. Não há limite de registros, e a altura da seção continua fixa.
+
+O vídeo `assets/2026/videos/video1.mp4` permanece como original. A versão para web e a capa JPEG ficam em `assets/optimized/2026/videos` e `assets/optimized/2026/posters`. A compressão manteve 576 × 1024 px, 30 fps, duração completa e áudio original, com H.264 e início rápido. A seção usa a capa estática, carregando o vídeo completo apenas ao abrir o diálogo.
+
+Para otimizar novos MP4s, execute `python3 scripts/optimize_campaign_2026.py` (requer FFmpeg com libx264 e libvmaf). O relatório `scripts/campaign-2026-media.json` registra redução, qualidade e checksum do original. O build e a prévia usam a versão otimizada quando ela corresponde ao arquivo atual; se o original for substituído ou a versão otimizada estiver ausente, usam o arquivo atual da pasta `2026/videos` até a próxima otimização. Outros formatos continuam disponíveis pela descoberta automática.
 
 Para visualizar localmente com descoberta automática de novos arquivos a cada recarregamento:
 
@@ -29,7 +33,7 @@ Para visualizar localmente com descoberta automática de novos arquivos a cada r
 python3 scripts/preview_site.py --port 8000
 ```
 
-Abra `http://127.0.0.1:8000/botox-rosa/#campanha-2026`. A prévia estática do HTML fonte contém a primeira foto; a prévia acima e o build publicado usam a coleção atual das pastas.
+Abra `http://127.0.0.1:8000/botox-rosa/#campanha-2026`. A prévia estática do HTML fonte contém os registros atuais; a prévia acima e o build publicado usam a coleção atual das pastas.
 
 ## Compartilhamento de links
 

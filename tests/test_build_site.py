@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import json
 import re
 import tempfile
@@ -143,3 +144,34 @@ class VersionedBuildTest(unittest.TestCase):
         self.assertIn('1 foto', text)
         self.assertIn('%22%3E%3Cscript%3E', text)
         self.assertNotIn('encontro "><script>', text)
+
+    def test_campaign_uses_optimized_video_and_cover_only_for_matching_source(self):
+        self.add_campaign_section()
+        self.add_campaign_file('fotos/photo.jpg')
+        source = self.add_campaign_file('videos/video.mp4', 'original video')
+        video = self.root / 'botox-rosa/assets/optimized/2026/videos/video.mp4'
+        poster = self.root / 'botox-rosa/assets/optimized/2026/posters/video.jpg'
+        for path in (video, poster):
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text('optimized media')
+        report = self.root / 'scripts/campaign-2026-media.json'
+        report.parent.mkdir(parents=True)
+        report.write_text(json.dumps([{
+            'source': source.relative_to(self.root).as_posix(),
+            'path': video.relative_to(self.root).as_posix(),
+            'poster': poster.relative_to(self.root).as_posix(),
+            'source_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
+        }]))
+        self.assertEqual([item['type'] for item in builder.campaign_2026_media(self.root)], ['video', 'image'])
+        assets = builder.build(self.root, self.output, 'a' * 40)
+        text = (self.output / 'botox-rosa/index.html').read_text()
+        self.assertIn('1 foto + 1 vídeo', text)
+        self.assertIn('data-media="' + assets[video.relative_to(self.root).as_posix()].removeprefix('botox-rosa/') + '"', text)
+        self.assertIn('data-poster="' + assets[poster.relative_to(self.root).as_posix()].removeprefix('botox-rosa/') + '"', text)
+        self.assertNotIn('data-preview-src', text)
+        source.write_text('replacement video')
+        media = builder.campaign_2026_media(self.root)[0]
+        self.assertEqual(media['src'], 'assets/2026/videos/video.mp4')
+        self.assertNotIn('poster', media)
+        report.write_text('invalid JSON')
+        self.assertEqual(builder.campaign_2026_media(self.root)[0]['src'], 'assets/2026/videos/video.mp4')

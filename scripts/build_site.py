@@ -25,8 +25,25 @@ VIDEO_EXTENSIONS = {".mp4", ".webm", ".m4v"}
 
 def campaign_2026_media(root):
     """Discover published media; ignore hidden files, symlinks and unsupported formats."""
+    report = root / "scripts/campaign-2026-media.json"
+    try:
+        entries = json.loads(report.read_text(encoding="utf-8")) if report.is_file() else []
+    except (ValueError, OSError):
+        entries = []
+    optimized = {entry["source"]: entry for entry in entries
+                 if isinstance(entry, dict) and isinstance(entry.get("source"), str)} if isinstance(entries, list) else {}
+
+    def optimized_file(value):
+        if not isinstance(value, str):
+            return None
+        path = root / value
+        allowed = (root / "botox-rosa/assets/optimized/2026").absolute()
+        if path.is_file() and not path.is_symlink() and path.resolve().is_relative_to(allowed):
+            return path
+        return None
+
     groups = []
-    for folder, extensions, kind in (("fotos", PHOTO_EXTENSIONS, "image"), ("videos", VIDEO_EXTENSIONS, "video")):
+    for folder, extensions, kind in (("videos", VIDEO_EXTENSIONS, "video"), ("fotos", PHOTO_EXTENSIONS, "image")):
         directory = root / "botox-rosa/assets/2026" / folder
         files = sorted((file for file in directory.glob("*")
                         if file.is_file() and not file.is_symlink() and not file.name.startswith(".")
@@ -34,13 +51,21 @@ def campaign_2026_media(root):
                        key=lambda file: tuple((0, int(part)) if part.isdigit() else (1, part.casefold())
                                               for part in re.split(r'(\d+)', file.name)))
         groups.append([(file, kind) for file in files])
-    # Interleave photos and videos while preserving natural filename order.
+    # Start with a video, then alternate videos and photos in natural filename order.
     media = []
     for index in range(max(map(len, groups), default=0)):
         for group in groups:
             if index < len(group):
                 file, kind = group[index]
-                media.append({"src": quote(file.relative_to(root / "botox-rosa").as_posix(), safe="/"), "type": kind})
+                item = {"src": quote(file.relative_to(root / "botox-rosa").as_posix(), safe="/"), "type": kind}
+                entry = optimized.get(file.relative_to(root).as_posix()) if kind == "video" else None
+                if entry and entry.get("source_sha256") == hashlib.sha256(file.read_bytes()).hexdigest():
+                    video, poster = optimized_file(entry.get("path")), optimized_file(entry.get("poster"))
+                    if video:
+                        item["src"] = quote(video.relative_to(root / "botox-rosa").as_posix(), safe="/")
+                        if poster:
+                            item["poster"] = quote(poster.relative_to(root / "botox-rosa").as_posix(), safe="/")
+                media.append(item)
     return media
 
 
@@ -55,12 +80,17 @@ def render_campaign_2026(text, root):
         source = html.escape(item["src"], quote=True)
         action = "Ampliar foto" if item["type"] == "image" else "Assistir ao vídeo"
         icon = "expand" if item["type"] == "image" else "play"
+        poster_attr = f' data-poster="{html.escape(item["poster"], quote=True)}"' if item.get("poster") else ""
         if item["type"] == "image":
             visual = f'<img src="{source}" alt="Registro da campanha Botox Rosa 2026 na clínica" loading="lazy" decoding="async">'
         else:
             # Only the selected video fetches metadata, never the entire collection.
-            visual = f'<video data-preview-src="{source}" preload="none" muted playsinline aria-hidden="true"></video><span class="diary-video-mark"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg><span>UMA HISTÓRIA EM VÍDEO</span></span>'
-        cards.append(f'''<button type="button" class="diary-card" data-media="{source}" data-type="{item['type']}" data-title="{title}" data-description="Um encontro de autocuidado na edição de 2026." data-track-video="campanha_2026_{number}" data-track-placement="campanha_2026" aria-label="{action}: {title}"{(' hidden' if index else '')}>
+            if item.get("poster"):
+                visual = f'<img src="{html.escape(item["poster"], quote=True)}" alt="Capa de vídeo da campanha Botox Rosa 2026" loading="lazy" decoding="async">'
+            else:
+                visual = f'<video data-preview-src="{source}" preload="none" muted playsinline aria-hidden="true"></video>'
+            visual += '<span class="diary-video-mark"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg><span>UMA HISTÓRIA EM VÍDEO</span></span>'
+        cards.append(f'''<button type="button" class="diary-card" data-media="{source}" data-type="{item['type']}"{poster_attr} data-title="{title}" data-description="Um encontro de autocuidado na edição de 2026." data-track-video="campanha_2026_{number}" data-track-placement="campanha_2026" aria-label="{action}: {title}"{(' hidden' if index else '')}>
               <span class="diary-visual">{visual}</span>
               <span class="diary-card-action">{action} <svg class="icon" aria-hidden="true"><use href="#icon-{icon}"/></svg></span>
             </button>''')
