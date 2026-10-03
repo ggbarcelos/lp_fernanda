@@ -1,5 +1,7 @@
 # Botox Rosa — Outubro 2026
 
+Google Analytics 4 integrado pelo ID `G-FGM9MBKS4D`, com cliques no WhatsApp como evento principal e identificação da posição e intenção do botão. Configuração, painel e critérios de medição em [analytics.md](analytics.md).
+
 Landing page da campanha da Dra. Fernanda Beltrão. HTML, CSS e JavaScript estáticos, compatíveis com a hospedagem atual do projeto. O `index.html` da raiz redireciona automaticamente para `botox-rosa/`, preservando parâmetros e âncoras quando o JavaScript está disponível. Há redirecionamento por HTML para navegadores sem JavaScript. A raiz foi reduzida a uma página leve de redirecionamento com metadados sociais; a versão anterior da clínica permanece no histórico Git.
 
 - Página: `botox-rosa/index.html`.

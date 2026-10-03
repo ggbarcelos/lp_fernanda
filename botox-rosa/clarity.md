@@ -35,7 +35,7 @@ Conteúdos: `convite`, `proposito`, `historia`, `encontro`, `cuidado`, `camiseta
 
 Cada seção dispara uma vez por carregamento. Passagens rápidas pela seção e tempo com a aba oculta não contam. A métrica mede chegada ao título, sem afirmar leitura de todo o texto. Cada vídeo dispara início e conclusão uma vez por abertura: pausar e retomar não duplica; reabrir permite registrar uma nova reprodução. Os loops automáticos de fundo não contam. Os eventos gerais e específicos representam a mesma ação e não devem ser somados. Um clique no WhatsApp indica intenção de contato, não mensagem enviada ou agendamento confirmado.
 
-Falhas no Clarity ou no armazenamento não impedem navegação, reprodução ou cliques. O gancho existente do Google Analytics permanece independente. Sem `IntersectionObserver`, apenas os eventos de seção ficam indisponíveis.
+Falhas no Clarity ou no armazenamento não impedem navegação, reprodução ou cliques. A integração do Google Analytics em `assets/analytics.js` permanece independente, conforme [analytics.md](analytics.md). Sem `IntersectionObserver`, apenas os eventos de seção ficam indisponíveis.
 
 ## Validação
 

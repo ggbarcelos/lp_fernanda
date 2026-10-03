@@ -422,16 +422,4 @@
     document.querySelectorAll('.site-footer, .album-controls, .diary-controls, .hero-bottom').forEach(element => contactObserver.observe(element));
   }
 
-  // Optional GA hook uses only validated placement labels. Failures cannot block contact.
-  document.addEventListener('click', event => {
-    const link = event.target.closest?.('[data-whatsapp][data-track-cta]');
-    const placement = link?.dataset.trackCta;
-    if (!placement || !/^[a-z][a-z0-9_]{0,63}$/.test(placement)) return;
-    try {
-      if (typeof window.gtag === 'function') {
-        const result = window.gtag('event', 'whatsapp_click', { campaign: 'botox_rosa_2026', cta_position: placement });
-        if (result && typeof result.catch === 'function') result.catch(() => {});
-      }
-    } catch { /* Analytics failures leave the native WhatsApp link usable. */ }
-  });
 })();
