@@ -141,3 +141,9 @@ Os CTAs distinguem dúvidas e consulta de horários com mensagens preenchidas qu
 A tag da versão e os eventos de intenção permitem analisar os cliques no Clarity, conforme `clarity.md`. Aumento de conversão depende da medição após publicação. Perfil da Empresa no Google, Search Console e registros de mensagens/agendamentos continuam sendo ações externas à LP.
 
 Validação desta revisão: 9 testes Python e 18 testes Node passaram; build com 171 arquivos versionados. Chromium conferido em 320, 390, 768, 1024 e 1440 px, com CTA principal na primeira tela, sem rolagem horizontal ou imagens quebradas. Menu, Escape, FAQ, âncora do álbum, ampliação e 11 links de WhatsApp verificados, sem erros de JavaScript. O envio de mensagem no aplicativo e o recebimento de eventos no painel continuam dependendo de validação externa.
+
+## Campanha em destaque · revisão do briefing
+
+O briefing mais recente recoloca “Botox Rosa 2026” e “Seu cuidado. Nossa causa.” no centro da abertura. A explicação da camiseta inclui mulheres e homens e precede os dados da profissional e o CTA “Quero saber mais pelo WhatsApp”. O FAQ foi consolidado em sete perguntas, e o WhatsApp do celular passou a ficar no cabeçalho fixo para evitar sobreposição com conteúdo e controles. A margem acima do convite final foi preservada.
+
+Nesta revisão, a comunicação do benefício foi limitada a botox conforme o briefing atual, substituindo o escopo mais amplo registrado historicamente neste arquivo. Pendências de confirmação, critérios de medição e verificações em [revisao-conversao.md](revisao-conversao.md). Não houve publicação em produção.

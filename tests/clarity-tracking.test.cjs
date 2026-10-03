@@ -203,3 +203,18 @@ test('WhatsApp intent differentiates questions and schedules without reporting a
   invalid.dispatch('click', {closest: () => ({dataset: {trackCta: 'hero', trackIntent: 'patient@example.com'}})});
   assert.deepEqual(invalid.events(), ['whatsapp_click', 'whatsapp_click_hero']);
 });
+
+
+test('WhatsApp links keep the clinic number and the main campaign message', () => {
+  const html = fs.readFileSync('botox-rosa/index.html', 'utf8');
+  const ctas = [...html.matchAll(/<a\b[^>]*\bdata-whatsapp\b[^>]*>/g)].map(match => match[0]);
+  for (const tag of ctas) {
+    const url = new URL(tag.match(/href="([^"]+)"/)[1]);
+    assert.equal(url.origin, 'https://wa.me');
+    assert.equal(url.pathname, '/5551986390931');
+    assert.ok(url.searchParams.get('text'));
+    if (tag.includes('data-track-cta="hero"')) {
+      assert.equal(url.searchParams.get('text'), 'Olá! Vi a campanha Botox Rosa 2026 e gostaria de saber como funciona e consultar os horários para avaliação.');
+    }
+  }
+});

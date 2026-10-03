@@ -408,12 +408,30 @@
     albumNavigation.hidden = pageCount <= 1;
   }
 
-  // Optional conversion hook for hosts that already use Google Analytics.
-  document.querySelectorAll('[data-whatsapp]').forEach(link => {
-    link.addEventListener('click', () => {
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'whatsapp_click', { campaign: 'botox_rosa_2026', link_text: link.textContent.trim() });
-      }
+  // Keep the desktop contact pill away from footer links and gallery controls.
+  const floatingContact = document.querySelector('.floating-whatsapp');
+  if (floatingContact && 'IntersectionObserver' in window) {
+    const visibleControls = new Set();
+    const contactObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) visibleControls.add(entry.target);
+        else visibleControls.delete(entry.target);
+      });
+      floatingContact.classList.toggle('is-obscuring', visibleControls.size > 0);
     });
+    document.querySelectorAll('.site-footer, .album-controls, .diary-controls, .hero-bottom').forEach(element => contactObserver.observe(element));
+  }
+
+  // Optional GA hook uses only validated placement labels. Failures cannot block contact.
+  document.addEventListener('click', event => {
+    const link = event.target.closest?.('[data-whatsapp][data-track-cta]');
+    const placement = link?.dataset.trackCta;
+    if (!placement || !/^[a-z][a-z0-9_]{0,63}$/.test(placement)) return;
+    try {
+      if (typeof window.gtag === 'function') {
+        const result = window.gtag('event', 'whatsapp_click', { campaign: 'botox_rosa_2026', cta_position: placement });
+        if (result && typeof result.catch === 'function') result.catch(() => {});
+      }
+    } catch { /* Analytics failures leave the native WhatsApp link usable. */ }
   });
 })();
