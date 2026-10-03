@@ -784,5 +784,32 @@
       }
     ],
     "full": "botox-rosa/assets/optimized/images/logo-glauber-908.webp"
+  },
+  "botox-rosa/assets/2026/fotos/img01.png": {
+    "source_sha256": "bfdf86f2d3908414d310a0aa18f5cc735196b04372762e506f3d139d646b4eaf",
+    "source_bytes": 1800435,
+    "width": 948,
+    "height": 1660,
+    "variants": [
+      {
+        "path": "botox-rosa/assets/optimized/images/campaign-2026-img01-360.webp",
+        "width": 360,
+        "height": 630,
+        "bytes": 40644
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/campaign-2026-img01-640.webp",
+        "width": 640,
+        "height": 1121,
+        "bytes": 94454
+      },
+      {
+        "path": "botox-rosa/assets/optimized/images/campaign-2026-img01-948.webp",
+        "width": 948,
+        "height": 1660,
+        "bytes": 153658
+      }
+    ],
+    "full": "botox-rosa/assets/2026/fotos/img01.png"
   }
 }

@@ -1,5 +1,31 @@
 # Otimização de imagens e vídeos
 
+## Revisão de Core Web Vitals · 02/10/2026
+
+O diagnóstico informado tinha LCP de 4,7 s e INP de 290 ms, com apenas cinco visualizações. Foram aplicadas estas melhorias:
+
+- DM Sans e Playfair Display locais, em três arquivos WOFF2 variáveis, com preload e `font-display: swap`; o CSS externo do Google Fonts deixou de bloquear a renderização.
+- Texto, oferta e fotografia da hero visíveis desde a primeira pintura, sem animação de entrada com opacidade zero.
+- Clarity remoto e reprodução ambiente agendados depois de `load`, em um intervalo ocioso. A função de fila do Clarity continua disponível imediatamente para os eventos de campanha.
+- Rolagem com um único `requestAnimationFrame`, lendo a geometria antes de alterar o cabeçalho; parallax não é calculado no celular.
+- Gradientes sem grandes camadas de blur animadas e cabeçalho sem backdrop-filter no celular. O diálogo usa sobreposição escura sem blur de tela inteira.
+- Foto `assets/2026/fotos/img01.png` com versões responsivas WebP. A versão de 640 px ocupa 94.454 bytes, contra 1.800.435 bytes do original (94,8% menos). O original permanece no diálogo de ampliação. O build verifica o checksum antes de usar derivados.
+
+Medição local comparativa em Chromium, cache frio, densidade 1×, latência de 150 ms, download de 200.000 bytes/s e CPU reduzida 4×:
+
+| Indicador | Antes | Depois |
+| --- | --- | --- |
+| LCP em 390 px | 3,37 s | 2,04 s |
+| LCP em 1440 px | 3,59 s | 2,36 s |
+| CLS em 390 px | 0,060 | 0 |
+| Foto original de 2026 na abertura | 1,8 MB | Não solicitada |
+
+Os valores são uma execução comparativa de laboratório, não a pontuação do Clarity nem o INP de usuários reais. A nota deve ser medida novamente após publicação e novas visitas. As interações de menu, ampliação e FAQ no celular ficaram entre 32 e 48 ms na execução final, contra 40 a 96 ms na execução inicial; isso não representa o INP de campo. No desktop, as interações ficaram entre 112 e 200 ms, contra 152 a 256 ms inicialmente.
+
+Para novas fotos de 2026: `python3 scripts/optimize_images.py --campaign-only`, com Pillow/WebP. O build do GitHub Actions continua usando apenas a biblioteca padrão do Python. Sem derivados válidos, usa a fotografia original atual.
+
+Referências: [otimização de LCP](https://web.dev/articles/optimize-lcp) e [otimização de INP](https://web.dev/articles/optimize-inp).
+
 Revisão de 01/10/2026. O layout, os textos aprovados, o Clarity e a configuração de atualização automática foram preservados.
 
 ## Resultados

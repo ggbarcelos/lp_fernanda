@@ -220,7 +220,7 @@ details[open] .faq-plus::after { transform: rotate(0); }
 .floating-whatsapp:hover { transform: translateY(-3px); background: linear-gradient(145deg,#ad4d76,#91385c); box-shadow: 0 7px 28px #a7496d55; }
 .floating-label { position: absolute; right: 64px; background: #fff1f6; color: #82415f; border: 1px solid #e9bfce; font-size: 10px; padding: 8px 14px; white-space: nowrap; border-radius: 4px; opacity: 0; pointer-events: none; transform: translateX(5px); transition: opacity .3s, transform .3s; }
 .floating-whatsapp:hover .floating-label, .floating-whatsapp:focus-visible .floating-label { opacity: 1; transform: translateX(0); }
-.hero-enter { animation: hero-in 1s var(--ease) both; }
+.hero-enter { opacity: 1; }
 .hero-copy h1 { animation-delay: .1s; }
 .hero-description { animation-delay: .2s; }
 .hero-actions { animation-delay: .3s; }

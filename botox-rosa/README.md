@@ -6,7 +6,7 @@ Landing page da campanha da Dra. Fernanda Beltrão. HTML, CSS e JavaScript está
 - Domínio de publicação: `https://fernandabeltrao.com.br/botox-rosa/`.
 - WhatsApp: `5551986390931`, reutilizado da página principal. Todos os CTAs têm mensagem específica da campanha.
 - Identidade da clínica: verde `#4A6F70`, dourado `#D7B36A`, logo e fotografias existentes. Rosa da campanha: `#A7496D`.
-- Sem bibliotecas JavaScript adicionais. Google Fonts é o único recurso visual externo; há fontes de sistema como alternativa.
+- Sem bibliotecas JavaScript adicionais. DM Sans e Playfair Display são servidas localmente em WOFF2 variável, com fontes de sistema como alternativa e licenças em `assets/fonts`.
 - Abertura com fundo verde, títulos grandes e foto e vídeo em proporções próximas: `assets/material/fotos/principal.png` em destaque à direita e os vídeos da campanha à esquerda. A oferta completa aparece em uma composição inspirada em convite, com cabeçalho rosa, ícone de camiseta, divisão pontilhada e faixa verde para destacar a camiseta de presente. As condições especiais recebem um marcador rosa. O texto é de 18 px no desktop e 17 px no celular, com introdução maior. No celular, a oferta e o convite para participar aparecem logo após o título e antes das fotos e dos vídeos. Transição direta para a campanha e profundidade suave ao rolar.
 - O álbum reúne nove fotos e nove vídeos intercalados, em três páginas de seis registros. As capas preservam o quadro completo com fundo desfocado, e as legendas ficam abaixo das imagens. A foto principal permanece na abertura e compõe os banners de compartilhamento social.
 
@@ -97,6 +97,8 @@ Detalhes, limites da hospedagem e comandos em [atualizacoes-cache.md](atualizaco
 ## Imagens e vídeos leves
 
 As fotos e capas usam versões responsivas com `srcset` e `sizes`, WebP e decodificação assíncrona. A galeria cria o fundo desfocado a partir da imagem que já carregou, evitando baixar todo o álbum na abertura. A ampliação da foto principal usa WebP sem perdas; as outras fotografias ampliadas usam seus originais. Logos em WebP sem perdas preservam transparência e letras.
+
+As fotos de `assets/2026/fotos` também podem receber derivados com `python3 scripts/optimize_images.py --campaign-only` (Pillow com WebP). O build e a prévia usam o catálogo somente quando o checksum corresponde ao original atual. Sem derivados válidos, exibem o arquivo original. A foto ampliada mantém o original. O conteúdo da hero aparece imediatamente; o vídeo ambiente e o script remoto do Clarity aguardam o carregamento crítico e um intervalo ocioso do navegador. Eventos de campanha ficam enfileirados desde a abertura.
 
 Os vídeos mantêm duração, quadros, áudio e enquadramento. Recompressões foram aceitas somente quando ficaram menores e atingiram média VMAF de pelo menos 95 na comparação amostrada; nos demais casos, os fluxos originais foram mantidos com início rápido. Relatório, medidas e regeneração em [otimizacao-performance.md](otimizacao-performance.md).
 

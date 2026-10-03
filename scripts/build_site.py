@@ -32,6 +32,12 @@ def campaign_2026_media(root):
         entries = []
     optimized = {entry["source"]: entry for entry in entries
                  if isinstance(entry, dict) and isinstance(entry.get("source"), str)} if isinstance(entries, list) else {}
+    try:
+        images = json.loads((root / "scripts/image-variants.json").read_text(encoding="utf-8"))
+        if not isinstance(images, dict):
+            images = {}
+    except (ValueError, OSError):
+        images = {}
 
     def optimized_file(value):
         if not isinstance(value, str):
@@ -58,6 +64,22 @@ def campaign_2026_media(root):
             if index < len(group):
                 file, kind = group[index]
                 item = {"src": quote(file.relative_to(root / "botox-rosa").as_posix(), safe="/"), "type": kind}
+                image_entry = images.get(file.relative_to(root).as_posix()) if kind == "image" else None
+                if isinstance(image_entry, dict) and image_entry.get("source_sha256") == hashlib.sha256(file.read_bytes()).hexdigest():
+                    variants = []
+                    for variant in image_entry.get("variants", []):
+                        if not isinstance(variant, dict) or not isinstance(variant.get("path"), str):
+                            continue
+                        path = root / variant["path"]
+                        if (path.is_file() and not path.is_symlink() and
+                                path.resolve().is_relative_to((root / "botox-rosa/assets/optimized/images").resolve()) and
+                                isinstance(variant.get("width"), int) and variant["width"] > 0):
+                            variants.append((variant["width"], quote(path.relative_to(root / "botox-rosa").as_posix(), safe="/")))
+                    if variants:
+                        variants.sort()
+                        item["image_src"] = next((url for width, url in variants if width >= 640), variants[-1][1])
+                        item["srcset"] = ", ".join(f"{url} {width}w" for width, url in variants)
+                        item["width"], item["height"] = image_entry["width"], image_entry["height"]
                 entry = optimized.get(file.relative_to(root).as_posix()) if kind == "video" else None
                 if entry and entry.get("source_sha256") == hashlib.sha256(file.read_bytes()).hexdigest():
                     video, poster = optimized_file(entry.get("path")), optimized_file(entry.get("poster"))
@@ -85,7 +107,9 @@ def render_campaign_2026(text, root):
         icon = "expand" if item["type"] == "image" else "play"
         poster_attr = f' data-poster="{html.escape(item["poster"], quote=True)}"' if item.get("poster") else ""
         if item["type"] == "image":
-            visual = f'<img src="{source}" alt="Registro da campanha Botox Rosa 2026 na clínica" loading="lazy" decoding="async">'
+            image_source = html.escape(item.get("image_src", item["src"]), quote=True)
+            responsive = (f' srcset="{html.escape(item["srcset"], quote=True)}" sizes="(max-width: 760px) calc(100vw - 72px), 480px" width="{item["width"]}" height="{item["height"]}"' if item.get("srcset") else "")
+            visual = f'<img src="{image_source}"{responsive} alt="Registro da campanha Botox Rosa 2026 na clínica" loading="lazy" decoding="async">'
         else:
             # Lightweight silent excerpts are loaded only while the mix is visible.
             if item.get("preview"):

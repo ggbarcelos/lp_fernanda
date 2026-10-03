@@ -145,6 +145,35 @@ class VersionedBuildTest(unittest.TestCase):
         self.assertIn('%22%3E%3Cscript%3E', text)
         self.assertNotIn('encontro "><script>', text)
 
+    def test_campaign_responsive_photos_keep_original_and_reject_stale_variants(self):
+        self.add_campaign_section()
+        source = self.add_campaign_file('fotos/photo.png', 'original photo')
+        variants = []
+        for width in (360, 640):
+            path = self.root / f'botox-rosa/assets/optimized/images/photo-{width}.webp'
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(f'webp {width}')
+            variants.append({'path': path.relative_to(self.root).as_posix(), 'width': width})
+        report = self.root / 'scripts/image-variants.json'
+        report.parent.mkdir(parents=True)
+        report.write_text(json.dumps({source.relative_to(self.root).as_posix(): {
+            'source_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
+            'width': 1000, 'height': 1500, 'variants': variants,
+        }}))
+        assets = builder.build(self.root, self.output, 'a' * 40)
+        text = (self.output / 'botox-rosa/index.html').read_text()
+        self.assertIn('data-media="' + assets[source.relative_to(self.root).as_posix()].removeprefix('botox-rosa/') + '"', text)
+        for variant in variants:
+            url = assets[variant['path']].removeprefix('botox-rosa/')
+            self.assertIn(f'{url} {variant["width"]}w', text)
+        self.assertIn('width="1000" height="1500"', text)
+        source.write_text('replacement photo')
+        media = builder.campaign_2026_media(self.root)[0]
+        self.assertNotIn('image_src', media)
+        self.assertNotIn('srcset', media)
+        report.write_text('invalid JSON')
+        self.assertEqual(builder.campaign_2026_media(self.root)[0]['src'], 'assets/2026/fotos/photo.png')
+
     def test_campaign_uses_optimized_video_and_cover_only_for_matching_source(self):
         self.add_campaign_section()
         self.add_campaign_file('fotos/photo.jpg')

@@ -37,7 +37,11 @@
   window.addEventListener('scroll', () => {
     if (!scrollPending) {
       scrollPending = true;
-      requestAnimationFrame(updateScroll);
+      requestAnimationFrame(() => {
+        // Read geometry before the header class changes to avoid forced layout.
+        if (!mobileQuery.matches) updateParallax();
+        updateScroll();
+      });
     }
   }, { passive: true });
   updateScroll();
@@ -84,6 +88,14 @@
   const heroWatch = document.querySelector('[data-hero-watch]');
   const heroImage = document.querySelector('.hero-portrait img');
   let heroImageReady = !heroImage || heroImage.complete;
+  let ambientReady = false;
+  function scheduleAmbient() {
+    const start = () => { ambientReady = true; syncAmbientVideos(); };
+    if ('requestIdleCallback' in window) window.requestIdleCallback(start, { timeout: 2000 });
+    else window.setTimeout(start, 200);
+  }
+  if (document.readyState === 'complete') scheduleAmbient();
+  else window.addEventListener('load', scheduleAmbient, { once: true });
   if (!heroImageReady) {
     const finishHeroImage = () => { heroImageReady = true; syncAmbientVideos(); };
     heroImage.addEventListener('load', finishHeroImage, { once: true });
@@ -119,7 +131,7 @@
   }
 
   function syncAmbientVideos() {
-    const canPlay = heroImageReady && !navigator.connection?.saveData && !motionIsPaused() && !document.hidden && !dialog.open;
+    const canPlay = ambientReady && heroImageReady && !navigator.connection?.saveData && !motionIsPaused() && !document.hidden && !dialog.open;
     syncDiaryPlayback();
     ambientVideos.forEach(video => {
       if (canPlay && video.dataset.inView === 'true') {
@@ -147,21 +159,13 @@
   }
   updateMotionPreference();
 
-  let parallaxPending = false;
+  const hero = document.querySelector('.hero-cinema');
   function updateParallax() {
     if (!motionIsPaused() && !mobileQuery.matches) {
-      const hero = document.querySelector('.hero-cinema');
       const distance = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / hero.offsetHeight));
       parallaxItems.forEach(item => item.style.setProperty('--parallax', `${distance * Number(item.dataset.parallax)}px`));
     }
-    parallaxPending = false;
   }
-  window.addEventListener('scroll', () => {
-    if (!parallaxPending) {
-      parallaxPending = true;
-      requestAnimationFrame(updateParallax);
-    }
-  }, { passive: true });
   mobileQuery.addEventListener('change', () => {
     parallaxItems.forEach(item => item.style.removeProperty('--parallax'));
   });

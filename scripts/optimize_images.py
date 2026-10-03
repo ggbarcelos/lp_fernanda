@@ -1,5 +1,6 @@
 """Create responsive WebP copies; keep every supplied photograph unchanged."""
 
+import argparse
 import hashlib
 import json
 import re
@@ -10,16 +11,23 @@ ROOT = Path(__file__).resolve().parents[1]
 DESTINATION = ROOT / "botox-rosa/assets/optimized/images"
 
 
-def generate():
+def generate(campaign_only=False):
     DESTINATION.mkdir(parents=True, exist_ok=True)
     sources = sorted((ROOT / "botox-rosa/assets/material/fotos").glob("*.jpeg"))
     sources += [ROOT / "botox-rosa/assets/material/fotos/principal.png"]
     sources += sorted((ROOT / "botox-rosa/assets/media").glob("*poster.jpg"))
     sources += [ROOT / "botox-rosa/assets/imama-logo.png"]
     sources += sorted((ROOT / "img").glob("logo*.png"))
-    catalog = {}
+    campaign_sources = sorted(file for file in (ROOT / "botox-rosa/assets/2026/fotos").glob("*")
+                              if file.is_file() and not file.is_symlink()
+                              and file.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp", ".avif"))
+    sources = campaign_sources if campaign_only else sources + campaign_sources
+    catalog_path = ROOT / "scripts/image-variants.json"
+    catalog = json.loads(catalog_path.read_text(encoding="utf-8")) if campaign_only and catalog_path.exists() else {}
     for source in sources:
         name = re.sub(r"[^a-z0-9]+", "-", source.stem.lower()).strip("-")
+        if source in campaign_sources:
+            name = "campaign-2026-" + name
         with Image.open(source) as original:
             image = ImageOps.exif_transpose(original)
             image = image.convert("RGBA" if "A" in image.getbands() else "RGB")
@@ -46,4 +54,6 @@ def generate():
 
 
 if __name__ == "__main__":
-    generate()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--campaign-only", action="store_true")
+    generate(parser.parse_args().campaign_only)
