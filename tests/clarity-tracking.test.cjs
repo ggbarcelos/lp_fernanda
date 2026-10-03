@@ -179,13 +179,42 @@ test('unavailable observers and missing, throwing or rejecting APIs leave intera
 test('the HTML wires every CTA, video and section to stable labels before campaign initialization', () => {
   const html = fs.readFileSync('botox-rosa/index.html', 'utf8');
   const ctas = [...html.matchAll(/<a\b[^>]*\bdata-whatsapp\b[^>]*>/g)].map(match => match[0]);
-  assert.equal(ctas.length, 9);
-  assert.equal(new Set(ctas.map(tag => tag.match(/data-track-cta="([^"]+)"/)?.[1])).size, 9);
+  assert.equal(ctas.length, 10);
+  assert.equal(new Set(ctas.map(tag => tag.match(/data-track-cta="([^"]+)"/)?.[1])).size, 10);
   const videos = [...html.matchAll(/<button\b[^>]*\bdata-media="[^"]+\.mp4"[^>]*>/g)].map(match => match[0]);
   assert.equal(videos.length, 13);
   assert.ok(videos.every(tag => /data-track-video="[a-z][a-z0-9_]{0,63}"/.test(tag)));
-  assert.equal([...html.matchAll(/data-track-section="[^"]+"/g)].length, 7);
+  assert.equal([...html.matchAll(/data-track-section="[^"]+"/g)].length, 8);
   assert.ok(html.includes('data-track-cta="campanha_2026"'));
   assert.ok(html.includes('data-track-section="campanha_2026"'));
   assert.ok(html.indexOf('assets/clarity-tracking.js') < html.indexOf('assets/campaign.js'));
+});
+
+
+test('WhatsApp intent differentiates questions and schedules without reporting a lead', () => {
+  for (const intent of ['duvidas', 'horarios']) {
+    const result = visit();
+    result.dispatch('click', {closest: () => ({dataset: {trackCta: 'hero', trackIntent: intent}})});
+    assert.deepEqual(result.events(), [`whatsapp_intent_${intent}`, 'whatsapp_click', 'whatsapp_click_hero']);
+    assert.ok(result.calls.some(call => call.join(':') === `set:whatsapp_intencao:${intent}`));
+    assert.ok(result.calls.some(call => call.join(':') === 'set:lp_versao:conversao_2026_10'));
+  }
+  const invalid = visit();
+  invalid.dispatch('click', {closest: () => ({dataset: {trackCta: 'hero', trackIntent: 'patient@example.com'}})});
+  assert.deepEqual(invalid.events(), ['whatsapp_click', 'whatsapp_click_hero']);
+});
+
+
+test('WhatsApp links keep the clinic number and the main campaign message', () => {
+  const html = fs.readFileSync('botox-rosa/index.html', 'utf8');
+  const ctas = [...html.matchAll(/<a\b[^>]*\bdata-whatsapp\b[^>]*>/g)].map(match => match[0]);
+  for (const tag of ctas) {
+    const url = new URL(tag.match(/href="([^"]+)"/)[1]);
+    assert.equal(url.origin, 'https://wa.me');
+    assert.equal(url.pathname, '/5551986390931');
+    assert.ok(url.searchParams.get('text'));
+    if (tag.includes('data-track-cta="hero"')) {
+      assert.equal(url.searchParams.get('text'), 'Olá! Vi a campanha Botox Rosa 2026 e gostaria de saber como funciona e consultar os horários para avaliação.');
+    }
+  }
 });
