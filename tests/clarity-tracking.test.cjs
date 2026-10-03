@@ -179,12 +179,12 @@ test('unavailable observers and missing, throwing or rejecting APIs leave intera
 test('the HTML wires every CTA, video and section to stable labels before campaign initialization', () => {
   const html = fs.readFileSync('botox-rosa/index.html', 'utf8');
   const ctas = [...html.matchAll(/<a\b[^>]*\bdata-whatsapp\b[^>]*>/g)].map(match => match[0]);
-  assert.equal(ctas.length, 11);
-  assert.equal(new Set(ctas.map(tag => tag.match(/data-track-cta="([^"]+)"/)?.[1])).size, 11);
+  assert.equal(ctas.length, 10);
+  assert.equal(new Set(ctas.map(tag => tag.match(/data-track-cta="([^"]+)"/)?.[1])).size, 10);
   const videos = [...html.matchAll(/<button\b[^>]*\bdata-media="[^"]+\.mp4"[^>]*>/g)].map(match => match[0]);
   assert.equal(videos.length, 13);
   assert.ok(videos.every(tag => /data-track-video="[a-z][a-z0-9_]{0,63}"/.test(tag)));
-  assert.equal([...html.matchAll(/data-track-section="[^"]+"/g)].length, 9);
+  assert.equal([...html.matchAll(/data-track-section="[^"]+"/g)].length, 8);
   assert.ok(html.includes('data-track-cta="campanha_2026"'));
   assert.ok(html.includes('data-track-section="campanha_2026"'));
   assert.ok(html.indexOf('assets/clarity-tracking.js') < html.indexOf('assets/campaign.js'));

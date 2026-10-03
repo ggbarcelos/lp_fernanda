@@ -31,3 +31,7 @@ Os atributos `data-whatsapp` e `data-track-cta`, o evento `whatsapp_click` e os 
 28 testes automatizados passaram (9 Python e 19 Node) e o build gerou 171 arquivos versionados. As cores de texto/CTA revisadas apresentaram contraste entre 5,67:1 e 9,52:1; a avaliação usa as combinações base de cores, sem afirmar auditoria integral de acessibilidade.
 
 Capturas e conferência visual em Chromium com movimento reduzido, além de validação das interações e reprodução de vídeo. Nas larguras 320, 390, 768, 1024 e 1440 px, o CTA da abertura permaneceu visível, sem rolagem horizontal nem imagens quebradas. Foram verificados menu e Escape, FAQ, álbum e paginação, ampliação de foto, reprodução de vídeo com controles, ocultação do flutuante no rodapé e redirecionamento com UTMs e âncora. Os 11 CTAs geraram uma vez cada evento geral e específico; falha deliberada do GA não introduziu erros. Parâmetro pessoal de teste e mensagens do WhatsApp ficaram fora das propriedades personalizadas. Nenhuma mensagem real foi enviada.
+
+## Ajustes posteriores solicitados
+
+A abertura passou a comunicar “quem realizar botox ou um procedimento estético”, por solicitação explícita da responsável, substituindo o texto anterior restrito a botox nesse parágrafo. A seção “Vamos conversar?” (FAQ) foi removida, com atualização do menu e da numeração. Permanecem 10 pontos de contato e 8 títulos acompanhados pelo Clarity. A logo do desenvolvedor foi substituída pela versão WebP de 2400 × 800 px usada no projeto `lp_glauber`, exibida a 150 px de largura, com proporção preservada.
