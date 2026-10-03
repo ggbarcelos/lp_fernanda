@@ -351,9 +351,8 @@
 
   const pastAlbum = document.querySelector('.past-album');
   function syncPastAlbumLayout() {
-    if (pastAlbum) pastAlbum.open = !mobileQuery.matches || window.location.hash === '#momentos';
+    if (pastAlbum) pastAlbum.open = window.location.hash === '#momentos';
   }
-  mobileQuery.addEventListener('change', syncPastAlbumLayout);
   syncPastAlbumLayout();
   function openPastAlbum() {
     if (pastAlbum && window.location.hash === '#momentos') pastAlbum.open = true;

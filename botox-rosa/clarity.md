@@ -24,10 +24,10 @@ Para comparar outras peças, use `stories_lancamento`, `bio` etc. em `utm_conten
 
 | Evento | Disparo |
 | --- | --- |
-| `section_view_origem` | Título da segunda dobra pelo menos 50% visível por 1 segundo contínuo, com a aba ativa |
+| `section_view_origem` | Título da origem da campanha pelo menos 50% visível por 1 segundo contínuo, com a aba ativa |
 | `section_view_imama`, `section_view_galeria`, `section_view_profissional`, `section_view_duvidas`, `section_view_convite_final` | Mesmo critério para o título de cada seção |
 | `whatsapp_click` | Clique em qualquer CTA do WhatsApp |
-| `whatsapp_click_<posição>` | Clique no botão específico: `cabecalho`, `menu_mobile`, `hero`, `origem`, `galeria`, `duvidas`, `convite_final` ou `flutuante` |
+| `whatsapp_click_<posição>` | Clique no botão específico: `cabecalho`, `menu_mobile`, `hero`, `origem`, `galeria`, `duvidas`, `convite_final`, `profissional`, `avaliacao` ou `flutuante` |
 | `video_play` e `video_play_<conteúdo>` | Reprodução efetiva de um vídeo aberto no diálogo, no evento nativo `playing` |
 | `video_complete` e `video_complete_<conteúdo>` | Fim do vídeo, no evento nativo `ended` |
 
@@ -44,3 +44,11 @@ Execute `node --test tests/*.test.cjs` e `python3 -m unittest discover -s tests 
 Após publicar, abra o link com UTMs, mantenha a segunda dobra visível por pelo menos 1 segundo, reproduza um vídeo e clique em um CTA. No projeto do Clarity, confira as tags em filtros e os eventos em Smart events/gravações. O recebimento no painel depende da publicação, da biblioteca remota e das configurações de coleta do projeto.
 
 Referências: [API do Clarity](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-api) e [Identify API](https://learn.microsoft.com/en-us/clarity/setup-and-installation/identify-api).
+
+## Versão de conversão · outubro de 2026
+
+A tag `lp_versao=conversao_2026_10` identifica esta revisão. Os títulos da abertura e do passo a passo disparam `section_view_abertura` e `section_view_avaliacao`. Os botões preservam `whatsapp_click` e o evento por posição; os novos pontos são `profissional` e `avaliacao`.
+
+A tag `whatsapp_intencao` e os eventos `whatsapp_intent_duvidas` ou `whatsapp_intent_horarios` distinguem a ação escolhida. São filtros para o mesmo clique, não conversões adicionais. A intenção é definida pelo botão; não é uma interpretação da mensagem enviada.
+
+Para comparar resultados, filtre pela versão e pela origem do tráfego, exclua sessões de testes da equipe e compare visitantes com clique e sem clique. Mensagens recebidas e avaliações agendadas precisam ser conferidas pela equipe no atendimento; a LP não observa essas etapas. O recebimento dos novos eventos no painel só pode ser confirmado depois da publicação.

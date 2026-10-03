@@ -45,6 +45,7 @@
   }
   clarity('set', 'campanha', campaign);
   clarity('set', 'pagina', 'botox_rosa');
+  clarity('set', 'lp_versao', 'conversao_2026_10');
 
   // Only campaign labels are copied, never the full URL, query or WhatsApp text.
   const parameters = new URLSearchParams(window.location.search);
@@ -60,6 +61,11 @@
     const placement = link?.dataset.trackCta;
     if (!placement || !labelPattern.test(placement)) return;
     clarity('set', 'whatsapp_cta', placement);
+    const intent = link.dataset.trackIntent;
+    if (intent === 'duvidas' || intent === 'horarios') {
+      clarity('set', 'whatsapp_intencao', intent);
+      clarity('event', `whatsapp_intent_${intent}`);
+    }
     clarity('event', 'whatsapp_click');
     clarity('event', `whatsapp_click_${placement}`);
   }, true);

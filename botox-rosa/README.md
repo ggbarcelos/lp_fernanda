@@ -131,3 +131,13 @@ A dobra “Um lembrete de mulher para mulher” foi removida, junto com a entrad
 A seção do instituto foi renomeada para “IMAMA: acolhimento e apoio” e fica imediatamente após “A origem do Botox Rosa”. Depois vêm a galeria, a apresentação da profissional e o FAQ. O menu e a numeração acompanham essa ordem.
 
 A dobra do IMAMA usa fundo verde sálvia suave, títulos em verde e rosa e detalhes florais discretos. O texto “Juntas, a vida ganha mais força” apresenta a rede de acolhimento que inspira a campanha. A arte local `assets/material/fotos/imama.jpeg` aparece inteira e pode ser ampliada; sua legenda destaca a abertura oficial do Outubro Rosa do IMAMA em 2 de outubro de 2026, às 19h, no GNC Cinemas do Shopping Praia de Belas. Data e local foram transcritos da arte fornecida. No celular, texto e convite seguem em uma coluna. O card “2025 → 2026 · Uma história que continua” permanece removido.
+
+## Revisão de conversão · 03/10/2026
+
+Branch `codex/melhorias-conversao-fernanda`. A abertura prioriza serviço, bairro, profissional, experiência e CRO, com o WhatsApp antes da oferta compacta. A sequência agora é: abertura, profissional, avaliação, dúvidas, origem, IMAMA, diário de 2026, álbum de 2025 e convite final. A campanha e as mídias reais foram preservadas. O álbum anterior começa recolhido em todas as larguras e abre pelos links para `#momentos`.
+
+Os CTAs distinguem dúvidas e consulta de horários com mensagens preenchidas que evitam pressupor a decisão de realizar um procedimento. O FAQ aborda avaliação, custo, decisão, procedimentos, disponibilidade e condições. Valores, gratuidade, horários exatos e depoimentos não foram inventados: os detalhes não confirmados são direcionados à equipe. A Fernanda deve revisar as respostas sobre o atendimento antes da publicação.
+
+A tag da versão e os eventos de intenção permitem analisar os cliques no Clarity, conforme `clarity.md`. Aumento de conversão depende da medição após publicação. Perfil da Empresa no Google, Search Console e registros de mensagens/agendamentos continuam sendo ações externas à LP.
+
+Validação desta revisão: 9 testes Python e 18 testes Node passaram; build com 171 arquivos versionados. Chromium conferido em 320, 390, 768, 1024 e 1440 px, com CTA principal na primeira tela, sem rolagem horizontal ou imagens quebradas. Menu, Escape, FAQ, âncora do álbum, ampliação e 11 links de WhatsApp verificados, sem erros de JavaScript. O envio de mensagem no aplicativo e o recebimento de eventos no painel continuam dependendo de validação externa.

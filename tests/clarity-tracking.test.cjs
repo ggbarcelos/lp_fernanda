@@ -179,13 +179,27 @@ test('unavailable observers and missing, throwing or rejecting APIs leave intera
 test('the HTML wires every CTA, video and section to stable labels before campaign initialization', () => {
   const html = fs.readFileSync('botox-rosa/index.html', 'utf8');
   const ctas = [...html.matchAll(/<a\b[^>]*\bdata-whatsapp\b[^>]*>/g)].map(match => match[0]);
-  assert.equal(ctas.length, 9);
-  assert.equal(new Set(ctas.map(tag => tag.match(/data-track-cta="([^"]+)"/)?.[1])).size, 9);
+  assert.equal(ctas.length, 11);
+  assert.equal(new Set(ctas.map(tag => tag.match(/data-track-cta="([^"]+)"/)?.[1])).size, 11);
   const videos = [...html.matchAll(/<button\b[^>]*\bdata-media="[^"]+\.mp4"[^>]*>/g)].map(match => match[0]);
   assert.equal(videos.length, 13);
   assert.ok(videos.every(tag => /data-track-video="[a-z][a-z0-9_]{0,63}"/.test(tag)));
-  assert.equal([...html.matchAll(/data-track-section="[^"]+"/g)].length, 7);
+  assert.equal([...html.matchAll(/data-track-section="[^"]+"/g)].length, 9);
   assert.ok(html.includes('data-track-cta="campanha_2026"'));
   assert.ok(html.includes('data-track-section="campanha_2026"'));
   assert.ok(html.indexOf('assets/clarity-tracking.js') < html.indexOf('assets/campaign.js'));
+});
+
+
+test('WhatsApp intent differentiates questions and schedules without reporting a lead', () => {
+  for (const intent of ['duvidas', 'horarios']) {
+    const result = visit();
+    result.dispatch('click', {closest: () => ({dataset: {trackCta: 'hero', trackIntent: intent}})});
+    assert.deepEqual(result.events(), [`whatsapp_intent_${intent}`, 'whatsapp_click', 'whatsapp_click_hero']);
+    assert.ok(result.calls.some(call => call.join(':') === `set:whatsapp_intencao:${intent}`));
+    assert.ok(result.calls.some(call => call.join(':') === 'set:lp_versao:conversao_2026_10'));
+  }
+  const invalid = visit();
+  invalid.dispatch('click', {closest: () => ({dataset: {trackCta: 'hero', trackIntent: 'patient@example.com'}})});
+  assert.deepEqual(invalid.events(), ['whatsapp_click', 'whatsapp_click_hero']);
 });
